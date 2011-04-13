@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<experiment data="file:///C:/Users/fsteeg/Documents/workspace/com.quui.amas/files/Corpus">
+ 
+  <agent name="com.quui.amas.agents.Gazetteer">
+    <a start="88" end="91" label="determiner" object="rO0ABXQACmRldGVybWluZXI=" />
+    <a start="112" end="116" label="organization_nouns" object="rO0ABXQAEm9yZ2FuaXphdGlvbl9ub3Vucw==" />
+    <a start="148" end="152" label="organization_nouns" object="rO0ABXQAEm9yZ2FuaXphdGlvbl9ub3Vucw==" />
+    <a start="202" end="205" label="determiner" object="rO0ABXQACmRldGVybWluZXI=" />
+    <a start="319" end="322" label="determiner" object="rO0ABXQACmRldGVybWluZXI=" />
+    <a start="346" end="349" label="determiner" object="rO0ABXQACmRldGVybWluZXI=" />
+    <a start="390" end="393" label="determiner" object="rO0ABXQACmRldGVybWluZXI=" />
+    <a start="443" end="446" label="determiner" object="rO0ABXQACmRldGVybWluZXI=" />
+    <a start="496" end="497" label="determiner" object="rO0ABXQACmRldGVybWluZXI=" />
+    <a start="534" end="537" label="determiner" object="rO0ABXQACmRldGVybWluZXI=" />
+    <a start="600" end="603" label="determiner" object="rO0ABXQACmRldGVybWluZXI=" />
+    <a start="613" end="617" label="organization_nouns" object="rO0ABXQAEm9yZ2FuaXphdGlvbl9ub3Vucw==" />
+    <a start="665" end="676" label="organization_nouns" object="rO0ABXQAEm9yZ2FuaXphdGlvbl9ub3Vucw==" />
+  </agent>
+  
+</experiment>

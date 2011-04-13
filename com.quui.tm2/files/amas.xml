@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<amas:experiment data="" xmlns:amas="http://www.quui.com/amas" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.quui.com/amas amas.xsd ">
+  <amas:agent name="">
+    <amas:a end="" label="" object="" start=""/>
+  </amas:agent>
+</amas:experiment>

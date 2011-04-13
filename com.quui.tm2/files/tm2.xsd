@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.quui.com/tm2" elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tm2="http://www.quui.com/tm2">
+
+    <xsd:complexType name="experiment">
+    	<xsd:sequence>
+    		<xsd:element name="agent" type="tm2:agent" maxOccurs="unbounded" minOccurs="1"></xsd:element>
+    	</xsd:sequence>
+    	<xsd:attribute name="data" type="xsd:string" use="required"></xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:complexType name="agent">
+    	<xsd:sequence>
+    		<xsd:element name="a" type="tm2:a" maxOccurs="unbounded" minOccurs="1">
+    		</xsd:element>
+    	</xsd:sequence>
+    	<xsd:attribute name="name" type="xsd:string" use="required"></xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:complexType name="a">
+    	<xsd:attribute name="start" type="xsd:string" use="required"></xsd:attribute>
+    	<xsd:attribute name="end" type="xsd:string" use="required"></xsd:attribute>
+    	<xsd:attribute name="label" type="xsd:string" use="required"></xsd:attribute>
+    	<xsd:attribute name="object" type="xsd:string" use="optional"></xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:element name="experiment" type="tm2:experiment"></xsd:element>
+    
+</xsd:schema>

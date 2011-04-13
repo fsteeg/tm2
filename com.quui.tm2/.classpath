@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry exported="true" kind="lib" path="lib/weka-dev.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/org.eclipse.mylyn.wikitext.core_1.4.0.I20100626-2300-e3x.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/org.eclipse.mylyn.wikitext.mediawiki.core_1.4.0.I20100626-2300-e3x.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/org.eclipse.mylyn.wikitext.textile.core_1.4.0.I20100626-2300-e3x.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/junit-4.5.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
+	<classpathentry excluding="com/quui/amas/package-info.java|com/quui/amas/agents/gazetteer/CVS/|de/quui/qlog/AppenderTest.java|de/quui/qlog/Log4jAppender.java|com/quui/amas/agents/" kind="src" path="src"/>
+	<classpathentry excluding="com/quui/amas/agents/|com/quui/amas/doc/TestWikitextExport.java|com/quui/amas/AnnotationReaderTest.java|com/quui/amas/AnnotationReadWriteTest.java|com/quui/amas/BatchTest.java|com/quui/amas/EvaluationFilesTests.java|com/quui/amas/EvaluationObjectsTest.java|com/quui/amas/ExperimentApiTests.java|com/quui/amas/ExperimentSimpleApiTests.java|com/quui/amas/RetrievalTest.java|com/quui/amas/SampleApiUsage1.java|com/quui/amas/SampleApiUsage2.java|com/quui/amas/SkeletalStrategyUsage.java|com/quui/amas/SynthesisTest.java|com/quui/amas/WsdExperimentTest.java" kind="src" path="src-test"/>
+	<classpathentry exported="true" kind="lib" path="lib/jsr173_1.0_api.jar" sourcepath="lib/jsr173_1.0_src.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/wstx-asl-3.2.1.jar" sourcepath="com.quui.amassrc.zip"/>
+	<classpathentry exported="true" kind="lib" path="lib/stax-utils.jar" sourcepath="lib/stax-utils-src.zip"/>
+	<classpathentry exported="true" kind="lib" path="lib/log4j-1.2.15.jar" sourcepath="lib/log4j-1.2.15-src.zip"/>
+	<classpathentry exported="true" kind="lib" path="lib/commons-codec-1.3.jar" sourcepath="com.quui.amassrc.zip"/>
+	<classpathentry exported="true" kind="lib" path="lib/com.quui.qlog.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/commons-io-1.4.jar" sourcepath="lib/commons-io-1.4-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/commons-lang-2.4.jar" sourcepath="lib/commons-lang-2.4-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/guava-r06.jar" sourcepath="lib/guava-src-r06.zip"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

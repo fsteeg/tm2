@@ -1,0 +1,77 @@
+<%@ jet package="com.quui.amas.doc" imports="java.util.* com.quui.amas.* com.quui.amas.doc.Export.TemplateAttribute" class="ExperimentLatexTemplate" %>
+
+<% 
+Map<String, List> map = (Map<String,List>) argument;
+List<Interaction> list = (List<Interaction>) map.get(TemplateAttribute.FLOWS.toString());
+List<String> names = (List<String>)map.get(TemplateAttribute.NAMES.toString());
+Iterator<String> iter = names.iterator();
+ %>
+
+\documentclass[notitlepage,a4paper,abstracton]{scrartcl}
+\usepackage{natbib}
+\usepackage[colorlinks, urlcolor=blue, linkcolor=black]{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[]{paralist}
+\usepackage[]{epsfig}
+\usepackage[inner=2cm,outer=2cm,top=2cm,bottom=3.5cm]{geometry}
+\usepackage[automark,headsepline,headinclude]{scrpage2}
+\setlength\parskip{\smallskipamount} \setlength\parindent{0pt}
+\usepackage{listings}
+
+\begin{document}
+%\thispagestyle{empty}
+\section{<%=map.get(TemplateAttribute.TITLE.toString()).get(0)%>}
+
+\subsection{Overview}
+This is generated documentation for the experiment ``<%=map.get(TemplateAttribute.TITLE.toString())%>''. Corpus is crawled from ``<%=map.get(TemplateAttribute.CORPUS_LOCATION.toString())%>'', results are written to ``<%=map.get(TemplateAttribute.RESULT_LOCATION.toString())%>''. This experiment consists of <%=list.size()%> flows. This document was generated on <%=new Date()%>.
+\begin{center}
+\includegraphics[width=14cm]{<%=map.get(TemplateAttribute.FILES.toString()).get(0)%>}
+\end{center}
+
+\subsection{Data}
+
+Results were optained from following input (in file \lstinline!<%=map.get(TemplateAttribute.CORPUS_LOCATION.toString()).get(0)%>)!:
+
+\emph{<%=map.get(TemplateAttribute.CORPUS_TEXT.toString()).get(0)%>}
+
+\subsection{Agents}
+
+<% int c = 0; for (Iterator i = map.get(TemplateAttribute.SOURCES.toString()).iterator(); i.hasNext(); c++) { %>
+\subsubsection{Agent <%=iter.next().replace("$","\\$")%>}
+\includegraphics[width=12cm]{<%=map.get(TemplateAttribute.FILES.toString()).get(c+1)%>}
+\lstset{language={Java}, basicstyle=\scriptsize, commentstyle=\normalsize}
+\begin{lstlisting}
+<%=i.next()%>
+\end{lstlisting}
+<% } %>
+
+\subsection{Results}
+
+The agents produced following annotations:
+
+\subsubsection{Human-readable}
+<%=map.get(TemplateAttribute.ANNOTATED.toString())%>
+
+\subsubsection{XML}
+
+\lstset{language={XML}, basicstyle=\scriptsize}
+\begin{lstlisting}
+<%=map.get(TemplateAttribute.RESULT_TEXT.toString()).get(0)%>
+\end{lstlisting}
+
+<%
+List evalResult = map.get(TemplateAttribute.EVALUATION_RESULT.toString());
+ %>
+
+\subsection{Evaluation}
+
+The result has been evaluated against the following gold standard (read from \lstinline!<%=evalResult!=null?evalResult.get(0):"[not available]"%>!):
+
+\lstset{language={XML}, basicstyle=\scriptsize}
+\begin{lstlisting}
+<%=evalResult!=null?evalResult.get(1):"[not available]"%>
+\end{lstlisting}
+
+The evaluation resulted in the following result: <%=evalResult!=null?evalResult.get(2):"[not available]"%>
+
+\end{document}

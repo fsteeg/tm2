@@ -1,0 +1,51 @@
+<%@ jet package="com.quui.tm2.doc" imports="java.util.* java.io.* com.quui.tm2.* com.quui.tm2.doc.ExportHelper.* com.quui.tm2.util.*" class="ExperimentDotTemplate" %>
+
+<% 
+ExperimentInfo meta = (ExperimentInfo) argument;
+List<Analysis<?>> list = meta.flows;
+List<Synthesis<?,?>> trainings = meta.trains;
+ %>
+
+digraph experiment {
+	rankdir=TD
+	node[shape=box style=filled width=1.8]
+	subgraph cluster_0 {
+	
+		<%
+		for (Synthesis t : trainings) {
+			for(Object obs : t.data()) {
+				for(Object inf : t.info()) {
+					String obsName = (obs.getClass().getSimpleName().length()==0?obs.getClass().toString():obs.getClass().getSimpleName()).replace("$","").replaceAll("\\d","");
+					String infName = (inf.getClass().getSimpleName().length()==0?inf.getClass().toString():inf.getClass().getSimpleName()).replace("$","").replaceAll("\\d","");
+						String so = t.model().getClass().toString().replace("$","");
+				%>subgraph cluster_<%=Math.abs(inf.hashCode()+obs.hashCode())%> {
+						<%=obsName.substring(obsName.lastIndexOf(".")+1,obsName.length())%> -> <%=so.substring(so.lastIndexOf(".")+1,so.length())%>[style=dashed label="<%=t.getInfoTypeClass()==null||!Preferences.edgeLabels?"":" "+t.getInfoTypeClass().getSimpleName()%>"];
+						<%=infName.substring(infName.lastIndexOf(".")+1,infName.length())%> -> <%=so.substring(so.lastIndexOf(".")+1,so.length())%>[style=dashed label="<%=t.getDataTypeClass()==null||!Preferences.edgeLabels?"":" "+t.getDataTypeClass().getSimpleName()%>"]
+						label="Synthesis(<%=obsName.substring(obsName.lastIndexOf(".")+1,obsName.length())%>,<%=infName.substring(infName.lastIndexOf(".")+1,infName.length())%>)"
+				  }
+				<%	
+				}
+			}
+		}
+		%>
+	
+		<%
+		for (Analysis f : list) {
+			for(Object sii : f.sources()) {
+				String si = sii.getClass().getSimpleName().replace("$","").replaceAll("\\d","");
+				for(Object soo : f.targets()) {
+				String so = soo.getClass().getSimpleName().replace("$","").replaceAll("\\d","");
+		%>
+				<%=si.substring(si.lastIndexOf(".")+1,si.length())%> -> <%=so.substring(so.lastIndexOf(".")+1,so.length())%>[style=solid label="<%=f.getTypeClass()==null||!Preferences.edgeLabels?"":" " + f.getTypeClass().getSimpleName()%>"]
+		<%	
+				}
+			}
+		}
+		%>
+		
+		label="<%=meta.title%>:"
+	}
+	eval[style=filled fillcolor=green label="Result:\n<%=meta.evalResult!=null?meta.evalResult.split(";")[0]:"[Not available]"%>" width=1.5]
+	<%=meta.evalAgent%> -> eval[style=dashed arrowhead=open]
+	
+}

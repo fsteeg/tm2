@@ -1,0 +1,22 @@
+###########################
+# Amas Configuration File #
+###########################
+
+#####################
+# Environment Setup #
+#####################
+dot_home=/opt/local/bin/
+#/opt/local/bin/
+#C:/Program Files (x86)/Graphviz2.20/bin/
+dot_format=png
+sources=file:///absolute/path/to/project/com.quui.amas/src/
+#file:///C:/absolute/path/to/project/com.quui.amas/src/
+
+##################################
+# Default Values for Experiments #
+##################################
+default_name=Unnamed-TM2-Experiment
+default_gold=file:///absolute/path/to/project/com.quui.amas/files/Gold_Gazetteer.xml
+default_corpus=file:///absolute/path/to/project/com.quui.amas/files/Corpus.txt
+default_root=file:///absolute/path/to/project/com.quui.amas/output/
+default_result=file:///absolute/path/to/project/com.quui.amas/files/Gazetteer_Result.xml

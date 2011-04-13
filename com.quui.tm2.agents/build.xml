@@ -1,0 +1,170 @@
+<project name="tm2-agents" default="deploy" basedir=".">
+
+	<!-- Folders: the project setup -->
+	<property name="core.path" location="../com.quui.tm2"/>
+	<property name="build.dir" location="build" />
+	<property name="build.prod.dir" location="${build.dir}/prod" />
+	<property name="build.test.dir" location="${build.dir}/tests/classes" />
+	<property name="build.dist.dir" location="${build.dir}/dist" />
+	<property name="doc.dir" location="${build.dir}/doc" />
+	<property name="src.dir" location="src" />
+	<property name="test.dir" location="src-test" />
+	<property name="lib.dir" location="lib" />
+	<property name="checkstyle.config" location="${core.path}/files/modified-sun-checks.xml" />
+	<property name="findbugs.home" location="findbugs-1.3.5-rc1" />
+
+	<property name="summary.dir" location="${build.dir}/tests/summary" />
+	<property name="reports.dir" location="${build.dir}/tests/reports" />
+
+	<property name="deploy.dir" location="${build.dir}/deploy" />
+
+	<property name="ant.java.version" value="1.5" />
+
+	<!-- Custom tasks: -->
+	<taskdef resource="checkstyletask.properties" classpath="${lib.dir}/checkstyle-all-4.4.jar" />
+	<!--
+	<taskdef name="findbugs" classname="edu.umd.cs.findbugs.anttask.FindBugsTask" classpath="${lib.dir}/findbugs-ant.jar" />
+	-->
+
+	<!-- The classpath: where the classes are to be found -->
+	<path id="project.classpath">
+		<pathelement location="${build.prod.dir}" />
+		<pathelement location="${build.test.dir}" />
+		<fileset dir="${lib.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+		<pathelement location="${core.path}/build/tests/classes" />
+		<pathelement location="${core.path}/build/prod" />
+		<fileset dir="${core.path}/lib">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<!-- Prepare the build: create folders for class files-->
+	<target name="prepare">
+		<mkdir dir="${build.dir}" />
+		<mkdir dir="${build.prod.dir}" />
+		<mkdir dir="${build.test.dir}" />
+		<mkdir dir="${build.dist.dir}" />
+		<mkdir dir="${doc.dir}" />
+		<mkdir dir="${reports.dir}" />
+		<mkdir dir="${summary.dir}" />
+	</target>
+
+	<target name="deploy-core-java">
+		<ant antfile="${core.path}/build.xml" inheritall="false" dir="${core.path}" target="all" />
+	</target>
+
+	<!-- Compile normal sources -->
+	<target name="compile" depends="prepare, deploy-core-java">
+		<javac srcdir="${src.dir}" destdir="${build.prod.dir}" deprecation="true">
+			<compilerarg value="-Xlint"/>
+			<classpath refid="project.classpath" />
+		</javac>
+		<!-- copy resources to be in classpath -->
+		<copy todir="${build.prod.dir}">
+			<fileset dir="${src.dir}" excludes="**/*.java" />
+		</copy>
+
+	</target>
+
+	<!-- Compile test sources -->
+	<target name="compile-tests" depends="compile">
+		<javac srcdir="${test.dir}" destdir="${build.test.dir}" deprecation="true">
+			<compilerarg value="-Xlint"/>
+			<classpath refid="project.classpath" />
+		</javac>
+	</target>
+
+	<!-- Run the tests -->
+	<target name="test" depends="compile-tests">
+		<junit fork="yes" haltonfailure="no" printsummary="yes" showoutput="yes">
+			<classpath refid="project.classpath" />
+			<batchtest todir="${reports.dir}">
+				<formatter type="xml" />
+				<fileset dir="${build.test.dir}" includes="**/*Suite*.class" />
+			</batchtest>
+		</junit>
+	</target>
+
+	<!-- Report the tests -->
+	<target name="test-report" depends="test">
+		<!-- collect the results into a summary report -->
+		<junitreport todir="${summary.dir}">
+			<fileset dir="${reports.dir}">
+				<include name="TEST-*.xml" />
+			</fileset>
+			<report format="frames" todir="${summary.dir}" />
+		</junitreport>
+		<echo message="Wrote summary test report to: ${summary.dir}" />
+	</target>
+
+	<!-- Delete the two folders for class files, below the build directory -->
+	<target name="clean">
+		<delete includeemptydirs="true" failonerror="no">
+			<fileset dir="${build.dir}" includes="**/*" />
+			<fileset dir="${doc.dir}" includes="**/*" />
+			<fileset dir="output" includes="**/*" />
+		</delete>
+		<delete dir="${build.dir}">
+		</delete>
+		<delete dir="${doc.dir}">
+		</delete>
+		<delete dir="output">
+		</delete>
+	</target>
+
+	<!-- Generate javadoc documentation-->
+	<target name="doc">
+		<javadoc packagenames="com.quui.amas.*" sourcepath="src" destdir="${doc.dir}">
+		</javadoc>
+	</target>
+
+	<!-- Build a distribution jar-->
+	<target name="jar" depends="compile, compile-tests">
+		<jar destfile="${build.dist.dir}/amas.jar" basedir="${build.prod.dir}">
+			<manifest>
+				<attribute name="Main-Class" value="com.quui.amas.ui.ConsoleRetrieval" />
+			</manifest>
+		</jar>
+	</target>
+
+	<!-- Deploy our jar and the libraries -->
+	<target name="deploy" depends="jar">
+		<copy todir="${deploy.dir}">
+			<!-- deploy our jars -->
+			<fileset dir="${build.dist.dir}" casesensitive="yes">
+				<include name="*.jar" />
+			</fileset>
+			<!-- deploy required jars (only top level jars) -->
+			<fileset dir="${lib.dir}" casesensitive="yes">
+				<include name="*.jar" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="all" depends="deploy, checkstyle, doc">
+	</target>
+
+	<!-- Run Checkstyle -->
+	<target name="checkstyle">
+		<checkstyle config="${checkstyle.config}">
+			<fileset dir="${src.dir}/com/quui/amas" includes="*.java" />
+			<!--fileset dir="${test.dir}" includes="**/*.java" /-->
+
+			<formatter type="plain" />
+			<formatter type="xml" toFile="${build.dir}/checkstyle_errors.xml" />
+		</checkstyle>
+	</target>
+
+	<!-- Run FindBugs 
+	<target name="findbugs" depends="jar">
+		<findbugs home="${findbugs.home}" output="xml" outputFile="amas-fb.xml">
+			<sourcePath path="${src.dir}" />
+			<class location="${build.prod.dir}" />
+		</findbugs>
+	</target>
+	-->
+
+
+</project>

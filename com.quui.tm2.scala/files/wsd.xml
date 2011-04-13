@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tesla_chain xmlns="http://spinfo.uni-koeln.de/tesla/chain"
+ xmlns:shared="http://spinfo.uni-koeln.de/tesla/shared">
+ <metadata>
+  <author>
+   <shared:name>Fabian Steeg</shared:name>
+   <shared:organization>
+    Sprachliche Informationsverarbeitung
+   </shared:organization>
+   <shared:email>fsteeg@spinfo.uni-koeln.de</shared:email>
+   <shared:external_reference>
+    http://www.spinfo.uni-koeln.de/tesla
+   </shared:external_reference>
+  </author>
+  <description>Experiment Description</description>
+  <displayname>Experiment Title</displayname>
+ </metadata>
+ <corpusselector
+  adapter_class="de.uni_koeln.spinfo.tesla.runtime.signal.SignalAdapter"
+  selector_class="de.uni_koeln.spinfo.tesla.runtime.signal.TextCorpusSelector">
+  <configuration>
+   <shared:item category="query">
+    <shared:value>
+     SELECT e.documentId FROM CorpusAndDocument e WHERE e.corpusId
+     ='197887' OR e.corpusId ='197887'
+    </shared:value>
+   </shared:item>
+   <shared:item category="reader">
+    <shared:value>
+     de.uni_koeln.spinfo.tesla.runtime.signal.reader.TextFileReader
+    </shared:value>
+   </shared:item>
+  </configuration>
+  <produces_signals signal_group_id="sig_1" />
+  <name />
+ </corpusselector>
+ <component>
+  <component_description
+   xmlns="http://spinfo.uni-koeln.de/tesla/component">
+   <name>SPre_1</name>
+   <role>Preprocessor</role>
+   <description>description</description>
+   <version>1</version>
+   <component_class>
+    de.uni_koeln.spinfo.tesla.component.spre.SPre2Component
+   </component_class>
+  </component_description>
+  <author xmlns="http://spinfo.uni-koeln.de/tesla/component">
+   <shared:name>Christoph Benden, J"urgen Hermes</shared:name>
+   <shared:organization>
+    Sprachliche Informationsverarbeitung, Universit"at zu K"oln
+   </shared:organization>
+   <shared:email>
+    cbenden@spinfo.uni-koeln.de,jhermes@spinfo.uni-koeln.de
+   </shared:email>
+   <shared:external_reference>
+    Link zur Webseite...
+   </shared:external_reference>
+  </author>
+  <produces_analysis_reference
+   xmlns="http://spinfo.uni-koeln.de/tesla/component" id="SPre_1" />
+  <consumes_signals xmlns="http://spinfo.uni-koeln.de/tesla/component"
+   signal_group_id="sig_1" />
+  <configuration xmlns="http://spinfo.uni-koeln.de/tesla/component"
+   editor="de.uni_koeln.spinfo.tesla.client.ui.editors.form.configurations.FallbackConfigurationEditor" />
+ </component>
+ <component>
+  <component_description
+   xmlns="http://spinfo.uni-koeln.de/tesla/component">
+   <name>Senseval_1</name>
+   <role>Senseval Annotation</role>
+   <description>A component to use Senseval data in Tesla</description>
+   <version>0</version>
+   <component_class>
+    de.uni_koeln.spinfo.tesla.component.wsd.senseval.SensevalComponent
+   </component_class>
+  </component_description>
+  <author xmlns="http://spinfo.uni-koeln.de/tesla/component">
+   <shared:name>Fabian Steeg</shared:name>
+   <shared:organization>
+    Sprachliche Informationsverarbeitung
+   </shared:organization>
+   <shared:email>fsteeg@spinfo.uni-koeln.de</shared:email>
+   <shared:external_reference>
+    http://www.spinfo.uni-koeln.de/tesla
+   </shared:external_reference>
+  </author>
+  <produces_analysis_reference
+   xmlns="http://spinfo.uni-koeln.de/tesla/component" id="Senseval_1" />
+  <consumes_signals xmlns="http://spinfo.uni-koeln.de/tesla/component"
+   signal_group_id="sig_1" />
+ </component>
+ <component>
+  <component_description
+   xmlns="http://spinfo.uni-koeln.de/tesla/component">
+   <name>Features_1</name>
+   <role>Numerical Text Representation</role>
+   <description>
+    A component to generate a feature vector for an input text; output
+    of this component is ment to act as the input for machine learning
+    algorithms.
+   </description>
+   <version>0</version>
+   <component_class>
+    de.uni_koeln.spinfo.tesla.component.wsd.features.FeatureGeneratorComponent
+   </component_class>
+  </component_description>
+  <author xmlns="http://spinfo.uni-koeln.de/tesla/component">
+   <shared:name>Fabian Steeg</shared:name>
+   <shared:organization>
+    Sprachliche Informationsverarbeitung
+   </shared:organization>
+   <shared:email>fsteeg@spinfo.uni-koeln.de</shared:email>
+   <shared:external_reference>
+    http://www.spinfo.uni-koeln.de/tesla
+   </shared:external_reference>
+  </author>
+  <consumes_analysis_reference
+   xmlns="http://spinfo.uni-koeln.de/tesla/component" id="SPre_1"
+   requires="de.uni_koeln.spinfo.tesla.component.spre.data.Token"
+   role="Token" />
+  <produces_analysis_reference
+   xmlns="http://spinfo.uni-koeln.de/tesla/component" id="Features_1" />
+  <consumes_signals xmlns="http://spinfo.uni-koeln.de/tesla/component"
+   signal_group_id="sig_1" />
+  <configuration xmlns="http://spinfo.uni-koeln.de/tesla/component"
+   editor="de.uni_koeln.spinfo.tesla.client.ui.editors.form.configurations.FallbackConfigurationEditor">
+   <shared:item category="Features">
+    <shared:description>
+     The features to use (n-gram,length,word,paradigms).
+    </shared:description>
+    <shared:value>length</shared:value>
+   </shared:item>
+  </configuration>
+ </component>
+ <component>
+  <component_description
+   xmlns="http://spinfo.uni-koeln.de/tesla/component">
+   <name>Classifier_1</name>
+   <role>Classifier</role>
+   <description>
+    A classifier based on conditional probability trees, implementing
+    principles of hierarchical temporal memory (HTM)
+   </description>
+   <version>0</version>
+   <component_class>
+    de.uni_koeln.spinfo.tesla.component.wsd.classifier.ClassifierComponent
+   </component_class>
+  </component_description>
+  <author xmlns="http://spinfo.uni-koeln.de/tesla/component">
+   <shared:name>Fabian Steeg</shared:name>
+   <shared:organization>
+    Sprachliche Informationsverarbeitung
+   </shared:organization>
+   <shared:email>fsteeg@spinfo.uni-koeln.de</shared:email>
+   <shared:external_reference>
+    http://www.spinfo.uni-koeln.de/tesla
+   </shared:external_reference>
+  </author>
+  <consumes_analysis_reference
+   xmlns="http://spinfo.uni-koeln.de/tesla/component" id="Features_1"
+   requires="de.uni_koeln.spinfo.tesla.component.wsd.features.Feature"
+   role="Feature" />
+  <consumes_analysis_reference
+   xmlns="http://spinfo.uni-koeln.de/tesla/component" id="Senseval_1"
+   requires="de.uni_koeln.spinfo.tesla.component.wsd.senseval.data.Sense"
+   role="Sense" />
+  <produces_analysis_reference
+   xmlns="http://spinfo.uni-koeln.de/tesla/component" id="Classifier_1" />
+  <configuration xmlns="http://spinfo.uni-koeln.de/tesla/component"
+   editor="de.uni_koeln.spinfo.tesla.client.ui.editors.form.configurations.FallbackConfigurationEditor">
+   <shared:item category="Structure">
+    <shared:description>
+     Tree topology, number of children of each node on the levels of the
+     tree.
+    </shared:description>
+    <shared:value>2,2</shared:value>
+   </shared:item>
+   <shared:item category="Factor">
+    <shared:description>
+     The factor for multiplying the leaf number to get the level-1
+     pattern size.
+    </shared:description>
+    <shared:value>1</shared:value>
+   </shared:item>
+  </configuration>
+ </component>
+ <analysis
+  input_adapter="de.uni_koeln.spinfo.tesla.annotation.adapter.token.CachingTokenInputAdapter"
+  output_adapter="de.uni_koeln.spinfo.tesla.annotation.adapter.output.DefaultOutputAdapter"
+  id="Classifier_1">
+  <shared:role>Class</shared:role>
+  <annotation_type xmlns="http://spinfo.uni-koeln.de/tesla/shared">
+   de.uni_koeln.spinfo.tesla.component.wsd.classifier.Class
+  </annotation_type>
+  <shared:view_adapter
+   class="de.uni_koeln.spinfo.tesla.component.wsd.classifier.ClassConverter" />
+ </analysis>
+ <analysis
+  input_adapter="de.uni_koeln.spinfo.tesla.annotation.adapter.token.CachingTokenInputAdapter"
+  output_adapter="de.uni_koeln.spinfo.tesla.annotation.adapter.output.DefaultOutputAdapter"
+  id="Features_1">
+  <shared:role>Feature</shared:role>
+  <annotation_type xmlns="http://spinfo.uni-koeln.de/tesla/shared">
+   de.uni_koeln.spinfo.tesla.component.wsd.features.Feature
+  </annotation_type>
+  <shared:view_adapter
+   class="de.uni_koeln.spinfo.tesla.component.wsd.features.FeatureConverter" />
+ </analysis>
+ <analysis
+  input_adapter="de.uni_koeln.spinfo.tesla.annotation.adapter.token.CachingTokenInputAdapter"
+  output_adapter="de.uni_koeln.spinfo.tesla.annotation.adapter.output.DefaultOutputAdapter"
+  id="SPre_1">
+  <shared:role>Token</shared:role>
+  <annotation_type xmlns="http://spinfo.uni-koeln.de/tesla/shared">
+   de.uni_koeln.spinfo.tesla.component.spre.data.Token
+  </annotation_type>
+  <shared:annotation_impl>Kleiner Test</shared:annotation_impl>
+  <shared:view_adapter
+   class="de.uni_koeln.spinfo.tesla.component.spre.converter.SPreConverter" />
+ </analysis>
+ <analysis
+  input_adapter="de.uni_koeln.spinfo.tesla.annotation.adapter.token.CachingTokenInputAdapter"
+  output_adapter="de.uni_koeln.spinfo.tesla.annotation.adapter.output.DefaultOutputAdapter"
+  id="Senseval_1">
+  <shared:role>Sense</shared:role>
+  <annotation_type xmlns="http://spinfo.uni-koeln.de/tesla/shared">
+   de.uni_koeln.spinfo.tesla.component.wsd.senseval.data.Sense
+  </annotation_type>
+  <shared:view_adapter
+   class="de.uni_koeln.spinfo.tesla.component.wsd.senseval.data.SenseConverter" />
+ </analysis>
+ <signals>
+  <shared:signal
+   adapter_class="de.uni_koeln.spinfo.tesla.runtime.signal.SignalAdapter"
+   type="text" signal_id="sig_1" />
+ </signals>
+</tesla_chain>

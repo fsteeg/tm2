@@ -1,0 +1,37 @@
+<%@ jet package="com.quui.tm2.doc" imports="java.util.* com.quui.tm2.* com.quui.tm2.doc.ExportHelper.*" class="ExperimentWikitextTemplate" %>
+<% 
+ExperimentInfo meta = (ExperimentInfo) argument;
+List<Analysis<?>> list = meta.flows;
+List<AgentInfo> names = meta.agentNames;
+Iterator<AgentInfo> iter = names.iterator();
+ %>
+=<%=meta.title%>=
+
+==Resources==
+
+{|style="text-align:center"
+! Corpus Data !! Result Annotations !! Evaluation Result !! Gold Location
+|-
+| [<%=meta.corpusLocation.replaceAll("[\\[\\]]","")%>] 
+| [<%=meta.resultAnnotationsLocation.replaceAll("[\\[\\]]","")%>]
+| <%=meta.evalResult!=null?meta.evalResult.split(";")[0]:"[ not available ]"%>
+| [<%=meta.evalResult!=null?meta.evalResult.split(";")[1]:"[ not available ]"%>]
+|}
+
+==TM2 Setup==
+
+[[Image:<%=meta.referencedFiles.get(0)%>]]
+
+==Agent Details==
+
+<% int c = 0; for (Iterator i = meta.agentSources.iterator(); i.hasNext(); c++) { %>
+<%AgentInfo info = iter.next();%>
+
+===<%=info.getName()%>===
+[[Image:<%=meta.referencedFiles.get(c+1)%>|right]]
+''Source'': [<%=i.next()%>] <br/>
+''Config'': <nowiki><%=info.getConfig()%></nowiki>
+
+<% } %>
+
+''This documentation was generated on <%=new Date()%> by the TM2 system.''

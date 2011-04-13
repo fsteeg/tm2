@@ -1,0 +1,21 @@
+<%@ jet package="com.quui.tm2.doc" imports="java.util.* java.io.* com.quui.tm2.* " class="AgentDotTemplate" %>
+
+<% 
+AgentInfo agent = (AgentInfo) argument;
+ %>
+
+digraph{
+	/* Global settings */
+	size="3,8"
+	rankdir=LR
+	//label="<%=agent.config%>"
+	node[shape=record width=0.5]
+	edge[arrowhead=open style=dashed]
+	/* Nodes */
+	source[style=dashed label=""];
+	agent[label="{<%=agent.name%>}" width=1.5];
+	target[style=dashed label=""];
+	/* Edges */
+	source->agent[label="<%=agent.input%>"];
+	agent->target[label="<%=agent.output%>"];
+}

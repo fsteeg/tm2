@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<experiment data="files/Corpus">
+  <agent name="com.quui.amas.agents.Gazetteer">
+    <a start="5" end="11" label="non_existing_thing" />
+    <a start="55" end="59" label="org_key" />
+    <a start="55" end="59" label="org_key_cap" />
+    <a start="60" end="66" label="org_key" />
+    <a start="60" end="66" label="org_key_cap" />
+    <a start="88" end="91" label="determiner" />
+    <a start="100" end="102" label="stop" />
+    <a start="112" end="116" label="organization_nouns" />
+    <a start="137" end="141" label="stop" />
+    <a start="148" end="152" label="organization_nouns" />
+    <a start="202" end="205" label="determiner" />
+    <a start="215" end="217" label="stop" />
+    <a start="227" end="230" label="stop" />
+    <a start="295" end="301" label="org_key" />
+    <a start="295" end="301" label="org_key_cap" />
+    <a start="319" end="322" label="determiner" />
+    <a start="331" end="333" label="stop" />
+    <a start="346" end="349" label="determiner" />
+    <a start="385" end="389" label="stop" />
+    <a start="390" end="393" label="determiner" />
+    <a start="403" end="405" label="stop" />
+    <a start="439" end="442" label="stop" />
+    <a start="443" end="446" label="determiner" />
+    <a start="455" end="457" label="stop" />
+    <a start="466" end="469" label="stop" />
+    <a start="496" end="497" label="determiner" />
+    <a start="534" end="537" label="determiner" />
+    <a start="549" end="553" label="org_key" />
+    <a start="549" end="553" label="org_key_cap" />
+    <a start="555" end="558" label="stop" />
+    <a start="578" end="581" label="stop" />
+    <a start="597" end="599" label="stop" />
+    <a start="600" end="603" label="determiner" />
+    <a start="613" end="617" label="organization_nouns" />
+    <a start="635" end="641" label="org_key" />
+    <a start="635" end="641" label="org_key_cap" />
+    <a start="665" end="676" label="organization_nouns" />
+    <a start="677" end="679" label="stop" />
+    <a start="700" end="703" label="stop" />
+    <a start="734" end="740" label="org_key" />
+    <a start="734" end="740" label="org_key_cap" />
+    <a start="831" end="833" label="stop" />
+    <a start="899" end="902" label="stop" />
+    <a start="929" end="930" label="stop" />
+  </agent>
+</experiment>

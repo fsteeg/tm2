@@ -1,0 +1,11 @@
+digraph inter{
+	rankdir=LR
+	node[shape=record width=2 height=2]
+	edge[arrowhead=diamond taillabel="\n *" headlabel="1\n "]
+	agent[label="{{Agent\<I,O\>\n\<\<Interface\>\>||process\n(List\<Annotation\<I\>\>):\nList\<Annotation\<O\>\>)}}"]
+	annotation[label="{{Annotation\<T\>\n\<\<Interface\>\>||data():URL\nvalue(): T\nstart: BigInteger\nend: BigInteger}}"]
+	interaction[label="{{Interaction\<T\>\n\<\<Interface\>\>||sources():\nList\<Agent\<?,T\>\>\ntargets():\nList\<Agent\<T,?\>\>}}"]
+	experiment[label="{{Experiment\n\<\<Interface\>\>||interactions():\nList\<Interaction\<T\>\>\n...}}"]
+	batch[label="{{Batch||run(Experiment...):\nvoid}}"]
+	annotation->agent->interaction->experiment->batch
+}
