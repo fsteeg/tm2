@@ -1,0 +1,19 @@
+h1. TM2: Type-safe modeling in text mining
+
+h2. Prerequisites
+
+Java 6, Ant (for building), GCC (to build Senseval evaluation scorer app)
+
+h2. Setup
+
+* Copy @com.quui.tm2/src/tm2.properties.template@ to @com.quui.tm2/src/tm2.properties@
+* Set the @project@ property to the location of your local @com.quui.tm2@ project
+* Set the @dot_home@ property to the folder containing your local @dot@ binary file
+* Compile the @scorer2@ app: @cd com.quui.tm2.scala/files@; @gcc -o scorer2 scorer2.c@
+
+h2. Build
+
+* Build the code and run the tests: @cd com.quui.tm2.scala@; @ant@
+* Test result reports are generated at @com.quui.tm2.scala/build/tests/scala/summary@
+* Batch documentation is generated at @com.quui.tm2/output/batch-result.html@
+

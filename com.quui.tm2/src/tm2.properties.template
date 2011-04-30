@@ -1,0 +1,25 @@
+###########################
+# TM2 Configuration File #
+###########################
+
+#####################
+# Environment Setup #
+#####################
+# Full URL to the folder containing the Graphviz dot executable file, e.g.
+#/opt/local/bin/
+#C:/Program Files (x86)/Graphviz2.20/bin/
+dot_home=/opt/local/bin/
+# Full URL to the local core project, e.g.
+#file:///C:/absolute/path/to/project/com.quui.tm2
+#file:///home/fsteeg/git/tm2/com.quui.tm2
+project=file:///home/fsteeg/git/tm2/com.quui.tm2
+##################################
+# Default Values for Experiments #
+##################################
+sources=src/
+dot_format=png
+default_name=Unnamed-TM2-Experiment
+default_gold=files/Gold_Gazetteer.xml
+default_corpus=files/Corpus.txt
+default_root=output/
+default_result=files/Gazetteer_Result.xml
