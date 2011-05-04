@@ -84,7 +84,7 @@ public final class ImmutableAnnotation<T extends Comparable<T>> implements Annot
     private ImmutableAnnotation(final Class<? extends Agent<?, ?>> author, final T value,
             final BigInteger start, final BigInteger end) {
         this.author = author;
-        this.value = value;// newInstance(value);
+        this.value = value;// TODO: newInstance(value);
         this.start = newInstance(start);
         this.end = newInstance(end);
     }
@@ -105,7 +105,7 @@ public final class ImmutableAnnotation<T extends Comparable<T>> implements Annot
      * @return Returns the annotation value
      */
     public T getValue() {
-        return value;// newInstance(value);
+        return value;// TODO: newInstance(value);
     }
 
     /**
@@ -114,8 +114,7 @@ public final class ImmutableAnnotation<T extends Comparable<T>> implements Annot
      */
     private T newInstance(final T val) {
         /*
-         * It's a T, so casting the class to a class of T can't go wrong... or am I missing
-         * something?
+         * It's a T, so casting the class to a class of T can't go wrong...
          */
         @SuppressWarnings( "unchecked" ) Class<T> clazz = (Class<T>) val.getClass();
         try {

@@ -18,7 +18,6 @@ class SensevalSense(s: String) extends Agent[Context, Ambiguity] {
   val samples: List[Ambiguity] = trainDataReader.getAmbiguities.toList
   def process(input: java.util.List[Anno[Context]]) = {
     samples.map(sense(_)) // FIXME not samples...
-    //val train:List[String] = trainDataReader.getWords.toList
   }
   def sense(amb: Ambiguity): Anno[Ambiguity] = {
     ImmutableAnnotation.getInstance[Ambiguity](

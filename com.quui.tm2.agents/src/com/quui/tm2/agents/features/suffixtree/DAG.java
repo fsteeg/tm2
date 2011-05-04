@@ -9,8 +9,6 @@ import java.util.Set;
 import com.quui.tm2.agents.features.suffixtree.node.Node;
 import com.quui.tm2.agents.features.suffixtree.node.SimpleNodeAccessor;
 
-
-
 /**
  * A directed acyclic graph, a compact suffix tree
  * 
@@ -53,14 +51,6 @@ public class DAG {
     // TODO correct indices are not preserved
     private void merge(Pair pair) {
         Map<Long, Node> children = graph.accessor.getChildren(pair.p);
-        // System.out.println();
-        // System.out.println("p: " +
-        // ((WordSuffixTree)graph).mapper.getTranslatedEdgeLabel(pair.p));
-        // for (Long id : children.keySet()) {
-        // Node child = children.get(id);
-        // System.out.println("Child: " +
-        // ((WordSuffixTree)graph).mapper.getTranslatedEdgeLabel(child));
-        // }
         // merge p into q: remove edges out of p
         List<Node> parents = graph.accessor.getParents(pair.p);
         for (Node parentOfP : parents) {

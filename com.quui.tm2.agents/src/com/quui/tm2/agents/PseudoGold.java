@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.google.common.base.Joiner;
 import com.quui.tm2.Agent;
 import com.quui.tm2.Annotation;
 import com.quui.tm2.ImmutableAnnotation;
@@ -28,12 +27,6 @@ public class PseudoGold implements Agent<String, String> {
     public PseudoGold(final String... words) {
         this.words = Arrays.asList(words);
     }
-
-    // @Override
-    // public final String process(final String input) {
-    // return words.contains(input) ? Joiner.on("").join(words) + ":S" + words.indexOf(input)
-    // : input;
-    // }
 
     public List<Annotation<String>> process(List<Annotation<String>> input) {
         List<Annotation<String>> result = new ArrayList<Annotation<String>>();

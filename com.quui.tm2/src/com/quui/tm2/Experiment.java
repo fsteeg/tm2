@@ -86,7 +86,7 @@ public interface Experiment extends Runnable {
      * @return This builder, for cascaded calls.
      */
     public Builder analysis(final Analysis<?> interaction) {
-      // TODO not sure what this is -- corpus stuff?
+      // TODO simplify corpus stuff?
       if (interactions.size() == 0) {
         @SuppressWarnings( "unchecked" ) Analysis<?> i = new Analysis.Builder().target(
             interaction.sources().get(0)).build();
@@ -181,15 +181,7 @@ final class SynchronizedExperiment implements Experiment {
    * The blackboard, the common data structure for the results of the different agents.
    */
   private final Map<Class<? extends Agent<?, ?>>, List<Annotation<?>>> blackboard; // FIXME
-  // currently,
-  // class
-  // names
-  // are
-  // used,
-  // cannot
-  // use
-  // multiple
-  // instances
+  // currently, class names are used, cannot use multiple instances
   /*
    * TODO I'd rather not use arrays in the public API... but I can't get it type-safe for lists
    * without... Could arrays be a solution for more type safety on the blackboard?
@@ -203,14 +195,9 @@ final class SynchronizedExperiment implements Experiment {
   private String goldStandard;
   private String id;
   private List<Synthesis<?, ?>> syntheses;
-private long took;
+  private long took;
 
   public String toString() {
-//    List<Agent<?, ?>> analysingAgents = new ArrayList<Agent<?, ?>>();
-//    for (Analysis<?> a : analyses) {
-//      analysingAgents.addAll(a.sources());
-//      analysingAgents.addAll(a.targets());
-//    }
     List<Agent<?, ?>> synthesizingAgents = new ArrayList<Agent<?, ?>>();
     for (Synthesis<?, ?> s : syntheses) {
       synthesizingAgents.addAll(s.info());
@@ -233,7 +220,7 @@ private long took;
     Evaluation eval = null;
     for (Synthesis<?, ?> t : syntheses) {
       if(eval != null) break;
-      if (t.model() instanceof Evaluation) {// FIXME quick hack
+      if (t.model() instanceof Evaluation) {// FIXME dirty
         eval = (Evaluation) t.model(); // FIXME won't compile on OpenJDK
         System.out.println("Found evaluation (in synthesis): " + eval.getResultString());
       }
@@ -242,7 +229,7 @@ private long took;
       if(eval != null) break;
       for (Agent<?, ?> a : t.targets()) {
     	if(eval != null) break;
-        if (a instanceof Evaluation) {// FIXME quick hack
+        if (a instanceof Evaluation) {// FIXME dirty
           eval = (Evaluation) a; // FIXME won't compile on OpenJDK
           System.err.println("Found evaluation (in analysis): " + eval.getResultString());
         }
@@ -293,7 +280,7 @@ private long took;
     this.analyses = interactions;
     this.syntheses = trainings;
     /*
-     * Phew, nasty way to get the corpus data location from the first agent...
+     * Nasty way to get the corpus data location from the first agent...
      */
     Agent<?, ?> agent = interactions.get(0).targets().get(0);
     URL location;
@@ -320,9 +307,8 @@ private long took;
       for (Analysis<?> interaction : interactions()) {
         trainIfReady();
         interaction.run(blackboard);
-//        System.err.println("Agent on BB: " + blackboard.keySet());
       }
-      trainIfReady(); // FIXME
+      trainIfReady(); // FIXME redundant, find efficient solution
     }
     AnnotationWriter writer = new AnnotationWriter(blackboard, corpusLocation);
     writer.writeAnnotations(outputLocation);
@@ -432,8 +418,8 @@ private long took;
     return res;
   }
 
-@Override
-public long getTime() {
-	return took;
-}
+  @Override
+  public long getTime() {
+    return took;
+  }
 }

@@ -44,13 +44,6 @@ public class GraphvizExport {
 		boolean verbose = false;
 		String absCPDText = node.isRoot() ? "" : formatMatrix(node.absCPD, 0);
 		String cpdText = formatMatrix(node.cpd, digits);
-		// String mText = formatMatrix(new Double[][] {
-		// node.messageFromParent != null ? node.messageFromParent
-		// : new Double[] {},
-		// node.messageFromLeft != null ? node.messageFromLeft
-		// : new Double[] {},
-		// node.messageFromRight != null ? node.messageFromRight
-		// : new Double[] {} }, digits);
 		String nodeText = node.index + "[label=\"{"
 				+ (verbose ? additional : "") + "" + node.activation
 				+ "\\\\n\\\\n" + absCPDText + "|" + cpdText

@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import com.quui.tm2.util.AmasLogger;
+import com.quui.tm2.util.TM2Logger;
 
 /**
  * Synthesis of data and info into a model.
@@ -107,7 +107,7 @@ public interface Synthesis<D extends Comparable<D> & Serializable, I extends Com
             if (!canTrain(blackboard)) {
                 return null;
             }
-            AmasLogger.singleton().info("Running synthesis with blackboard: " + blackboard);
+            TM2Logger.singleton().info("Running synthesis with blackboard: " + blackboard);
 
             for (int i = 0; i < data.size(); i++) {
                 model.train(
@@ -149,11 +149,11 @@ public interface Synthesis<D extends Comparable<D> & Serializable, I extends Com
                 Agent<?, D> dat = data.get(i);
                 Agent<?, I> inf = info.get(i);
                 if (!(blackboard.containsKey(dat.getClass()) && blackboard.containsKey(inf.getClass()))) {
-                    AmasLogger.singleton().debug("Not training with blackboard: " + blackboard);
+                    TM2Logger.singleton().debug("Not training with blackboard: " + blackboard);
                     return false;
                 }
             }
-            AmasLogger.singleton().debug("Training with blackboard: " + blackboard);
+            TM2Logger.singleton().debug("Training with blackboard: " + blackboard);
             return true;
         }
 
@@ -169,8 +169,8 @@ public interface Synthesis<D extends Comparable<D> & Serializable, I extends Com
 
     }
 
-	Class<I> getInfoTypeClass();
+	  Class<I> getInfoTypeClass();
 
-	Class<D> getDataTypeClass();
+	  Class<D> getDataTypeClass();
 
 }

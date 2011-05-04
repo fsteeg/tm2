@@ -17,7 +17,6 @@ class SensevalEval(s: String) extends Agent[Sense, String] with Evaluation {
   def process(input: java.util.List[Anno[Sense]]) = {
     val sensevalOutput = for (anno <- input; sense = anno.getValue) yield sense.lemma + " " + sense.id + " " + sense.correct
     val res = sensevalOutput.sorted.mkString("\n")
-//    println(res)
     val file = new File("files/senseval.result")
     val fw = new FileWriter(file)
     fw.write(res); fw.close()
@@ -32,7 +31,6 @@ class SensevalEval(s: String) extends Agent[Sense, String] with Evaluation {
     Nil
   }
   def getF: Float = {
-    // In our setup P is always = R, and thus F, too
     val r = """precision: ([^ ]+) """.r
     val Some(res) = r findFirstIn response
     val r(p) = res

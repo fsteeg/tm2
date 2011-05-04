@@ -35,8 +35,6 @@ public final class ExportHelper {
     private static final String DOT = ".dot";
     private static final String VISUAL = "-visual";
 
-    // private static Logger logger = AmasLogger.singleton();
-
     /**
      * @param metadata The attributes for rendering
      * @param experiment The experiment to render
@@ -71,16 +69,16 @@ public final class ExportHelper {
         experimentInfo.resultAnnotationsLocation = x.getOutputAnnotationLocation();
         experimentInfo.evalAgent =(x.getEvaluation() != null ? x.getEvaluation().getClass().getSimpleName(): "No eval available");
         Class evalAgentClass = (x.getEvaluation() != null ? x.getEvaluation().getClass(): null);
-		experimentInfo.evalResult = 
+        experimentInfo.evalResult = 
 				(x.getEvaluation() != null ? x.getEvaluation().getResultString() : "No eval available")
 				+ ";"
 				+ (x.getGoldStandard() != null ? x.getGoldStandard() : "No gold available");
-		List<String> sources = new ArrayList<String>();
+        List<String> sources = new ArrayList<String>();
         String src = Preferences.get(Environment.SOURCES);
         String outputLocation = x.getOutputRootName();
         List<String> files = new ArrayList<String>();
         Set<Agent<?, ?>> agents = agentsInvolved(x.interactions());
-        Set<AgentInfo> agentInfos = new HashSet<AgentInfo>();// agentNames(interactions);
+        Set<AgentInfo> agentInfos = new HashSet<AgentInfo>();
         for (Agent<?, ?> agent : agents) {
             String a = agent.getClass().getName();
             String sourceFile = (src + a.replaceAll("\\.", "/")) + JAVA;
@@ -124,19 +122,6 @@ public final class ExportHelper {
         experimentInfo.took = x.getTime();
         return experimentInfo;
     }
-
-    // private static Set<String> agentNames(List<Interaction<?>> interactions) {
-    // Set<String> names = new TreeSet<String>();
-    // for (Interaction inter : interactions) {
-    // for (Agent a : (List<Agent>) inter.sources()) {
-    // names.add(a.getClass().getName());
-    // }
-    // for (Agent a : (List<Agent>) inter.targets()) {
-    // names.add(a.getClass().getName());
-    // }
-    // }
-    // return names;
-    // }
 
     private static String configString(Agent<?, ?> agent) {
         return String.format("configuration: %s", agent.toString());

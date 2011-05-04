@@ -1,2 +1,2 @@
-/** Core agents of the AMAS framework. */
+/** Core agents of the TM2 framework. */
 package com.quui.tm2.agents;

@@ -2,7 +2,7 @@ package com.quui.tm2
 import java.io.Serializable
 import com.quui.tm2.{Agent,Analysis, Annotations}
 import com.quui.tm2.doc.WikitextExport
-import com.quui.tm2.util.{Preferences,AmasLogger}
+import com.quui.tm2.util.{Preferences,TM2Logger}
 import scala.collection.JavaConversions._
 import RichAgent._
 import com.quui.tm2.{Agent, Analysis, Annotation, Model, Synthesis}

@@ -23,7 +23,6 @@ public final class Retrieval {
     }
 
     public Retrieval(Experiment experiment) throws MalformedURLException {
-        // this(new URL(experiment.getOutputAnnotationLocation()).toString());
         this(experiment.getOutputAnnotationLocation());
     }
 
@@ -84,7 +83,7 @@ public final class Retrieval {
      * @return Returns the actual data, the XML string containing the annotations
      */
     public String getData() {
-        // TODO should this method actually exist?
+        // TODO should this method really exist?
         String data = FileIO.read(reader.getData());
         return data;
     }

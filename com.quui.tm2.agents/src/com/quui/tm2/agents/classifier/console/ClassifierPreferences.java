@@ -20,8 +20,6 @@ public class ClassifierPreferences {
 
 	public final String propertiesFileLocation = "config.properties";
 
-//	public int senses;
-
 	public int digits;
 
 	public int context;
@@ -62,8 +60,6 @@ public class ClassifierPreferences {
 	private void readPropertiesFile() throws IOException, FileNotFoundException {
 		this.properties = new Properties();
 		properties.load(BayesTree.class.getResourceAsStream(propertiesFileLocation));
-//		this.senses = Integer.parseInt((String) properties
-//				.getProperty(Keys.SENSES.key));
 		this.digits = Integer.parseInt((String) properties
 				.getProperty(Keys.DIGITS.key));
 		this.filter = properties.getProperty(Keys.FILTER.key).equals(

@@ -105,11 +105,7 @@ public class SimpleNode implements Node {
     /**
      * @return Returns the children
      */
-    // public HashMap<Long, SimpleNode> getChildren() {
-    // return children;
-    // }
     public List<Node> getChildren() {
-        // TODO vorsicht das jetzt ein neues...
         return children != null ? new ArrayList<Node>(children
                 .values()) : null;
     }
@@ -195,27 +191,11 @@ public class SimpleNode implements Node {
     }
 
     /**
-     * @see de.uni_koeln.spinfo.strings.algo.lca.TreeNode#getChild(int)
-     */
-//    public TreeNode getChild(int num) {
-//        Iterator iter = children.keySet().iterator();
-//        int i = 0;
-//        while (iter.hasNext()) {
-//            TreeNode node = (TreeNode) children.get(iter.next());
-//            if (i == num)
-//                return node;
-//            i++;
-//        }
-//        return null;
-//    }
-
-    /**
      * @see de.uni_koeln.spinfo.strings.algo.lca.TreeNode#acceptDFSNum(int)
      */
     public void acceptDFSNum(int x) {
         this.dfs = x;
         setId(dfs);
-
     }
 
     /**

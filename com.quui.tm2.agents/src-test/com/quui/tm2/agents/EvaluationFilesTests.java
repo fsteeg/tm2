@@ -12,9 +12,9 @@ import org.junit.Test;
 
 import com.quui.tm2.Annotation;
 import com.quui.tm2.AnnotationReader;
-import com.quui.tm2.util.AmasLogger;
 import com.quui.tm2.util.Preferences;
 import com.quui.tm2.util.Preferences.Default;
+import com.quui.tm2.util.TM2Logger;
 
 public class EvaluationFilesTests {
 
@@ -42,7 +42,7 @@ public class EvaluationFilesTests {
         SimpleEvaluation evaluation = new SimpleEvaluation();
         evaluation.evaluateAgainst(gold, gold);
         assertEquals("Wrong evaluation result;", 1f, evaluation.getF(), 1e-9);
-        AmasLogger.singleton(getClass()).info(evaluation);
+        TM2Logger.singleton(getClass()).info(evaluation);
     }
 
     @Test
@@ -50,7 +50,7 @@ public class EvaluationFilesTests {
         SimpleEvaluation evaluation = new SimpleEvaluation();
         evaluation.evaluateAgainst(result, gold);
         assertTrue("Wrong evaluation result;", 1f != evaluation.getF());
-        AmasLogger.singleton(getClass()).info(evaluation);
+        TM2Logger.singleton(getClass()).info(evaluation);
     }
 
 }

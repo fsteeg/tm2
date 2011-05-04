@@ -1,7 +1,6 @@
 package com.quui.tm2.agents.classifier.weka;
 
 import java.text.NumberFormat;
-import java.util.Arrays;
 import java.util.List;
 
 import weka.classifiers.Classifier;
@@ -11,6 +10,10 @@ import weka.core.FastVector;
 import weka.core.Instance;
 import weka.core.Instances;
 
+/**
+ * Wraps a Weka classifier.
+ * @author fsteeg
+ */
 public class WekaClassifier implements WsdClassifier {
 
     private List<String> classes;
@@ -122,13 +125,8 @@ public class WekaClassifier implements WsdClassifier {
         return featureSize;
     }
 
-    public void reset() {
-    // not required for weka classifiers
-    }
-
     public void resetClassify() {
-    // not required for weka classifiers
-
+      // not required for weka classifiers
     }
 
 }

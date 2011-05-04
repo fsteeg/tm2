@@ -13,9 +13,9 @@ import com.quui.tm2.AnnotationReader;
 import com.quui.tm2.Evaluation;
 import com.quui.tm2.ImmutableAnnotation;
 import com.quui.tm2.Model;
-import com.quui.tm2.util.AmasLogger;
 import com.quui.tm2.util.Preferences;
 import com.quui.tm2.util.Preferences.Default;
+import com.quui.tm2.util.TM2Logger;
 
 /**
  * @author Fabian Steeg (fsteeg)
@@ -62,15 +62,6 @@ public class SimpleEvaluation<E extends Comparable<E> & Serializable> implements
   public String resultFile;
   String agent;
 
-  // private Class<T> agentClass;
-
-  /**
-   * An Evaluation of the default annotation file specified in the amas.properties file.
-   */
-  // @Deprecated
-  // public Evaluation() {
-  // this(Preferences.get(Preferences.Key.DEFAULT_ANNO));
-  // }
   /**
    * Sets the GOLD file.
    * @param gold The gold annotations file to evaluate against
@@ -84,7 +75,6 @@ public class SimpleEvaluation<E extends Comparable<E> & Serializable> implements
    */
   public SimpleEvaluation() {
     this.goldLocation = Preferences.get(Default.GOLD);
-    // this.agentClass = (Class<T>) agent.getClass();
   }
 
   public final <T extends Comparable<T> & Serializable> void evaluateWithDefaultGold(
@@ -115,7 +105,7 @@ public class SimpleEvaluation<E extends Comparable<E> & Serializable> implements
     evaluateAgainst(resultToEvaluate, gold);
     this.goldLocation = goldFileLocation;
     /* Print the evaluation result: */
-    AmasLogger.singleton().info(
+    TM2Logger.singleton().info(
         String.format("%s for evaluation of '%s' annotations against '%s'", getResultString(),
             agentClass.getSimpleName(), gold));
   }
@@ -211,7 +201,6 @@ public class SimpleEvaluation<E extends Comparable<E> & Serializable> implements
 
   @Override
   public String toString() {
-    // TODO Auto-generated method stub
     return String.format("%s using gold: %s, result: %s", getClass().getSimpleName(), goldLocation
         .substring(goldLocation.lastIndexOf('/') + 1), getResultString());
   }
@@ -237,7 +226,6 @@ public class SimpleEvaluation<E extends Comparable<E> & Serializable> implements
 		  }
 		};
 	} catch (ClassNotFoundException e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
 		return null;
 	}
@@ -252,8 +240,6 @@ public class SimpleEvaluation<E extends Comparable<E> & Serializable> implements
       List<Annotation<E>> correct) {
     // Generics with ? here work with the Eclipse compiler but not Sun's
     final Class author = values.get(0).author();
-//    List<Annotation<String>> gold = new AnnotationReader(goldLocation)
-//        .readAnnotations((Class<? extends Agent<?, String>>) author);
     // TODO use result here?
     List<Annotation<String>> result = evaluate(values, author, correct);
     evaluateAgainst(values, correct);

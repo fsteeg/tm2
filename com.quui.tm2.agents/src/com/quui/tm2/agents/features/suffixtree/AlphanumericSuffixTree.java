@@ -12,8 +12,6 @@ import java.util.Set;
 import com.quui.tm2.agents.features.suffixtree.node.Node;
 import com.quui.tm2.agents.features.suffixtree.node.NodeAccessor;
 
-
-
 /**
  * @author fsteeg
  * 
@@ -185,20 +183,4 @@ public abstract class AlphanumericSuffixTree extends NumericSuffixTree {
         return getAllNodes(node, new ArrayList(), leafsOnly);
     }
 
-//    public int[] find(String string) {
-//        for (Node node : getAllNodes()) {
-//            // if (node.isInternal()) {
-//            String prefix = getIncomingEdgeLabel(node);
-//            if (string.startsWith(prefix)) {
-//                String suffix = string.substring(prefix.length());
-//                Collection<? extends String> labelsUntilLeaf = getLabelsUntilLeaf(node);
-//                if (prefix.equals(string) || labelsUntilLeaf.contains(suffix.trim())) {
-//                    return new int[] { node.getSuffixIndex(),
-//                            node.getTextNumber() };
-//                }
-//            }
-//            // }
-//        }
-//        return null;
-//    }
 }

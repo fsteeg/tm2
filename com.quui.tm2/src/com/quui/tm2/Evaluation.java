@@ -1,6 +1,5 @@
 package com.quui.tm2;
 
-
 /**
  * @author Fabian Steeg (fsteeg)
  */

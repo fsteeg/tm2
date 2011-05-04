@@ -65,7 +65,6 @@ public final class Batch {
 			&& evaluation.getF() > max.getEvaluation().getF()) {
 		max = (SynchronizedExperiment) experiment;
 	  }
-      // experiment.g
     }
     File output = writeResult(builder);
     

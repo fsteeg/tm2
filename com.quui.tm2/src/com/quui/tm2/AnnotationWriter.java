@@ -22,7 +22,6 @@ import javax.xml.stream.XMLStreamWriter;
 
 import org.apache.commons.codec.binary.Base64;
 
-
 /**
  * @author Fabian Steeg (fsteeg)
  */
@@ -62,8 +61,8 @@ public class AnnotationWriter {
             outx = new FileOutputStream(new File(uri));
             XMLOutputFactory factory = XMLOutputFactory.newInstance();
             XMLStreamWriter writer = factory.createXMLStreamWriter(outx);
-            // writer.setDefaultNamespace("http://www.quui.com/amas");
-            // writer.setPrefix("amas", "http://www.quui.com/amas");
+            // writer.setDefaultNamespace("http://www.quui.com/tm2");
+            // writer.setPrefix("tm2", "http://www.quui.com/tm2");
             // TODO do this optional, prefs ("pretty-print")
             writer = new IndentingXMLStreamWriter(writer);
             /* ---------------------- */

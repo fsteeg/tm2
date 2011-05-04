@@ -27,7 +27,6 @@ public class StopwordsFilter {
 			theInstance = new StopwordsFilter(
 					ClassifierPreferences.getInstance().stopwordsLocation, ClassifierPreferences
 							.getInstance().encoding);
-//			System.out.println("Init with: " + theInstance.encoding + ", " + theInstance.location);
 			theInstance.init();
 		}
 		return theInstance;

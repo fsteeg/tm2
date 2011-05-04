@@ -50,8 +50,7 @@ public class WsdExperimentTest {
         // classify:
         x.analysis(new Analysis.Builder<FeatureVector>().source(featureGenerator)
                 .target(classifier).build());
-        // evaluate:
-        // TODO doppelt nötig? Und Stelle entscheidend!?
+        // evaluate: // TODO: why twice here? cf. Scala experiments
         x.analysis(new Analysis.Builder<String>().source(tokenizer).target(pseudoGold).build());
         x.analysis(new Analysis.Builder<String>().source(tokenizer).target(pseudoGold).build());
         x.synthesis(new Synthesis.Builder<String, String>(evaluation).data(classifier)

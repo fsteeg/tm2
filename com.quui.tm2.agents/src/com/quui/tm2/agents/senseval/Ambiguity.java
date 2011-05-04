@@ -2,14 +2,21 @@ package com.quui.tm2.agents.senseval;
 
 import java.io.Serializable;
 
+/**
+ * @author fsteeg
+ *
+ */
 public class Ambiguity implements Comparable<Ambiguity>, Serializable{
-	String lemma;
+	/**
+   * 
+   */
+  private static final long serialVersionUID = -3197794219019833712L;
+
+  String lemma;
 
 	String correct;
 
 	Context context;
-
-//	int target;
 
 	String id;
 
@@ -19,7 +26,6 @@ public class Ambiguity implements Comparable<Ambiguity>, Serializable{
 		this.lemma = lemma;
 		this.context = context;
 		this.correct = correct;
-//		this.target = target;
 	}
 
 	@Override
@@ -33,10 +39,6 @@ public class Ambiguity implements Comparable<Ambiguity>, Serializable{
 	public Context getContext() {
 		return context;
 	}
-
-//	public String getContext() {
-//		return context.getTarget();
-//	}
 
 	public String getCorrect() {
 		return correct;

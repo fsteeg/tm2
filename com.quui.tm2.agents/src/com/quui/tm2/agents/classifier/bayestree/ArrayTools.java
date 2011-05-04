@@ -1,6 +1,5 @@
 package com.quui.tm2.agents.classifier.bayestree;
 
-import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -14,8 +13,6 @@ import java.util.List;
  * 
  */
 public class ArrayTools {
-
-	// private static BigInteger zero = BigInteger.ZERO;
 
 	/**
 	 * @param vectors
@@ -67,26 +64,6 @@ public class ArrayTools {
 
 	}
 
-	// public static float[] normalizeForMax(int[] ints) {
-	// int max = Integer.MIN_VALUE;
-	// float[] row = new float[ints.length];
-	// for (int j = 0; j < ints.length; j++) {
-	// max = Math.max(max, ints[j]);
-	// }
-	// for (int j = 0; j < ints.length; j++) {
-	// if (max <= 0)
-	// row[j] = 0.0f;
-	// else {
-	// // BigInteger[] integers =
-	// // bigIntegers[j].divideAndRemainder(sum);
-	// // row[j] = Double.parseDouble(integers[0] + "." + integers[1]);
-	// row[j] = (float) ints[j] / max;
-	// // System.err.println("Normalized: " + row[j]);
-	// }
-	// }
-	// return row;
-	// }
-
 	public static Float[] normalizeForSum(Float[] bigIntegers) {
 		Float sum = 0f;
 		Float[] row = new Float[bigIntegers.length];
@@ -97,11 +74,7 @@ public class ArrayTools {
 			if (sum == 0)
 				row[j] = 0.0f;
 			else {
-				// BigInteger[] integers =
-				// bigIntegers[j].divideAndRemainder(sum);
-				// row[j] = Double.parseDouble(integers[0] + "." + integers[1]);
 				row[j] = bigIntegers[j].floatValue() / sum;
-				// System.err.println("Normalized: " + row[j]);
 			}
 		}
 		return row;
@@ -117,11 +90,7 @@ public class ArrayTools {
 			if (sum == 0)
 				row[j] = 0.0f;
 			else {
-				// BigInteger[] integers =
-				// bigIntegers[j].divideAndRemainder(sum);
-				// row[j] = Double.parseDouble(integers[0] + "." + integers[1]);
 				row[j] = (float) bigIntegers[j] / sum;
-				// System.err.println("Normalized: " + row[j]);
 			}
 		}
 		return row;
@@ -231,29 +200,6 @@ public class ArrayTools {
 		c = normalizeForSum(c);
 		return c;
 	}
-
-	/**
-	 * @param a
-	 *            The array
-	 * @param m
-	 *            The matrix
-	 * @return Retruns a matrix of the same dimension as m containing modified
-	 *         values from m: each element in each column is multiplied with the
-	 *         corresponding element in a
-	 */
-//	static Float[][] multiplyColums(Float[] a, float[][] m) {
-//		if (a.length != m[0].length)
-//			throw new IllegalStateException(
-//					"Different array and matrix sizes: " + a.length + ", "
-//							+ m[0].length);
-//		Float[][] c = new Float[m.length][m[0].length];
-//		for (int i = 0; i < a.length; i++) {
-//			for (int j = 0; j < c.length; j++) {
-//				c[j][i] = a[i] * m[j][i];
-//			}
-//		}
-//		return c;
-//	}
 
 	static Float[][] multiplyColums(Float[] a, Float[][] m) {
 		if (a.length != m[0].length)

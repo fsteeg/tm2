@@ -4,8 +4,9 @@ digraph inter{
 	edge[arrowhead=diamond taillabel="\n *" headlabel="1\n "]
 	agent[label="{{Agent\<I,O\>\n\<\<Interface\>\>||process\n(List\<Annotation\<I\>\>):\nList\<Annotation\<O\>\>)}}"]
 	annotation[label="{{Annotation\<T\>\n\<\<Interface\>\>||data():URL\nvalue(): T\nstart: BigInteger\nend: BigInteger}}"]
-	interaction[label="{{Interaction\<T\>\n\<\<Interface\>\>||sources():\nList\<Agent\<?,T\>\>\ntargets():\nList\<Agent\<T,?\>\>}}"]
-	experiment[label="{{Experiment\n\<\<Interface\>\>||interactions():\nList\<Interaction\<T\>\>\n...}}"]
+	analysis[label="{{Analysis\<T\>\n\<\<Interface\>\>||sources():\nList\<Agent\<?,T\>\>\ntargets():\nList\<Agent\<T,?\>\>}}"]
+	synthesis[label="{{Synthesis\<T\>\n\<\<Interface\>\>||info():Agent\<?,T\>\ndata():Agent\<?,T\>\>}}"]
+	experiment[label="{{Experiment\n\<\<Interface\>\>||analyses():\nList\<Analysis\<T\>\>\nsyntheses():\nList\<Synthesis\<T\>\>\n...}}"]
 	batch[label="{{Batch||run(Experiment...):\nvoid}}"]
-	annotation->agent->interaction->experiment->batch
+	annotation->agent->analysis;agent->synthesis;analysis->experiment;synthesis->experiment;experiment->batch
 }

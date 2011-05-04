@@ -18,7 +18,7 @@ import com.quui.tm2.util.Preferences.Default;
 
 /**
  * Suppose we have some Tagger already, and we merely want to enable usage of it
- * in AMAS, e.g. using it in an Experiment...
+ * in TM2, e.g. using it in an Experiment...
  */
 class Tagger {
     /**
@@ -80,8 +80,6 @@ public class SkeletalStrategyUsage {
                 new Analysis.Builder<String>().source(new Tokenizer()).target(
                         taggerAgent).build()).build();
         experiment.run();
-        // Export export = new Export(experiment,false);
-        // export.writeDocumentation(null);
         // TODO it does not work with an anonymous class...
         Retrieval r = new Retrieval(experiment.getOutputAnnotationLocation());
     }

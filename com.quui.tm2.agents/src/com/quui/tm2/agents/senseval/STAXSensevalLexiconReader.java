@@ -1,19 +1,19 @@
 package com.quui.tm2.agents.senseval;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.StringReader;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 
+/**
+ * @author fsteeg
+ *
+ */
 public class STAXSensevalLexiconReader {
 
 	Map<String, List<LexicalEntry>> lexicon;
@@ -43,30 +43,6 @@ public class STAXSensevalLexiconReader {
 		bufferedReader = new StringReader(signalData);
 		lexicon = new HashMap<String, List<LexicalEntry>>();
 	}
-
-//	public STAXSensevalLexiconReader(URL resource) {
-//		
-//		this(read(resource));
-//	}
-
-//	private static String read(URL resource) {
-////		File f = new File(resource.getPath().substring(
-////				resource.getPath().indexOf(':') + 1));
-//		File f = new File("jar:"+resource.getPath());
-//		try {
-////			File f = new File(resource.toURI());
-//			StringBuilder builder = new StringBuilder();
-//			Scanner s = new Scanner(f);
-//			while (s.hasNextLine()) {
-//				builder.append(s.nextLine()).append("\n");
-//			}
-//			System.out.println("USING LEXICON: " + builder.toString());
-//			return builder.toString();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		return null;
-//	}
 
 	public void load() {
 		XMLInputFactory factory = XMLInputFactory.newInstance();

@@ -1,5 +1,9 @@
 package com.quui.tm2.agents.senseval;
 
+/**
+ * @author fsteeg
+ *
+ */
 public class LexicalEntry {
 
 	public String gloss;

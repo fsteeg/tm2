@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.quui.tm2.Agent;
 import com.quui.tm2.Annotation;
-import com.quui.tm2.ImmutableAnnotation;
 import com.quui.tm2.Retrieval;
 
 public class ConsoleRetrieval {

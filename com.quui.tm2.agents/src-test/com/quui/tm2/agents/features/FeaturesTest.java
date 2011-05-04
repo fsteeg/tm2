@@ -1,6 +1,5 @@
 package com.quui.tm2.agents.features;
 
-
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;

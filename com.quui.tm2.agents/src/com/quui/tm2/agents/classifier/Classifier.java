@@ -32,11 +32,9 @@ public class Classifier implements Agent<FeatureVector, String>, Model<FeatureVe
 
     public Classifier(List<Integer> structure, float patternFactor,
             weka.classifiers.Classifier wekaClassifier, String... senses) {
-        // List<String> s = Arrays.asList(new String[] { "S0", "S1" });
         this.patternFactor = patternFactor;
         this.structure = structure;
         sensesMap = new HashMap<String, List<String>>();
-        // TODO one lemma only currently
         sensesMap.put("dummy", Arrays.asList(senses));
         this.wekaClassifier = wekaClassifier;
         System.out.println("Configuration: (specified in "
@@ -53,15 +51,12 @@ public class Classifier implements Agent<FeatureVector, String>, Model<FeatureVe
     	System.err.println("Hello training");
         List<Annotation<FeatureVector>> correspondingFeatures = (List)Annotations.firstOverlapsSecond(
                 value, correct)[0];
-        // System.out.println("Corresponding (train): " + correspondingFeatures);
         for (int i = 0; i < correspondingFeatures.size(); i++) {
             FeatureVector wordFeatures = value.get(i).getValue();
             String correctValue = correct.get(i).getValue();
             String key = wordFeatures.lemma;
             WsdClassifier classifier = lexicon.get(key);
             if (classifier == null) {
-                // System.out.println("Creating classifier for: " + key);
-                // TODO customize tree or use weka, etc
                 List<String> classes = sensesMap.values().iterator().next();
                 classifier = wekaClassifier == null ? new BayesTree(Ints.toArray(structure),
                         patternFactor, classes) : new WekaClassifier(classes, structure.get(0)
@@ -69,7 +64,6 @@ public class Classifier implements Agent<FeatureVector, String>, Model<FeatureVe
                 System.err.println("Storing classifier in lexicon for: " + key);
                 lexicon.put(key, classifier);
             }
-            // System.err.println(String.format("Training %s as %s", wordFeatures, correctValue));
             classifier.train(wordFeatures.getValues(), correctValue);
         }
         return this;
@@ -77,7 +71,6 @@ public class Classifier implements Agent<FeatureVector, String>, Model<FeatureVe
 
     public List<Annotation<String>> process(List<Annotation<FeatureVector>> input) {
         List<Annotation<String>> result = new ArrayList<Annotation<String>>();
-        // System.out.println("Processing (process): " + input);
         for (Annotation<FeatureVector> annotation : input) {
             FeatureVector featureVector = annotation.getValue();
             WsdClassifier classifier = lexicon.get(featureVector.lemma);
@@ -85,7 +78,6 @@ public class Classifier implements Agent<FeatureVector, String>, Model<FeatureVe
             	throw new IllegalStateException("No classifier in lexicon for: " + featureVector.lemma);
             }
             String r = classifier.classify(featureVector.getValues());
-            // System.err.println(String.format("Classified %s as %s", featureVector, r));
             result.add(ImmutableAnnotation.getInstance(getClass(), r, annotation.getStart(),
                     annotation.getEnd()));
         }

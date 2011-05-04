@@ -19,7 +19,6 @@ abstract class SensevalData(s: String) extends Agent[String, Context] {
   val words: java.util.List[String] = trainDataReader.getWords
   def process(input: java.util.List[Anno[String]]) = {
     samples.map(asAnnotation(_))
-    //val train:List[String] = trainDataReader.getWords.toList
   }
   def asAnnotation(amb: Ambiguity): Anno[Context] = {
     val r = ImmutableAnnotation.getInstance[Context](
@@ -27,7 +26,6 @@ abstract class SensevalData(s: String) extends Agent[String, Context] {
       amb.getContext:Context,
       amb.getContext.targetStart:Int,
       amb.getContext.targetEnd:Int)
-//    println(r)
     r
   }
   override def toString = file.toURL.toString

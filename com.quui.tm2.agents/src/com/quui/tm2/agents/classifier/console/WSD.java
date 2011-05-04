@@ -87,10 +87,6 @@ public class WSD {
             if (tree == null) {
                 List<String> list = classes.get(subSequence);
                 // it's the first time we train for the lemma:
-                // int size = 1;
-                // for (int in : structure) {
-                // size = size * in;
-                // }
                 tree = weka ? new WekaClassifier(list, structure[0]) : new BayesTree(structure,
                         patternFactor, list);
                 lexicon.put(subSequence, tree);
@@ -116,7 +112,6 @@ public class WSD {
                 }
                 j++;
             }
-//            tree.reset();
             if (ClassifierPreferences.getInstance().debug) {
                 System.out.println();
             }
@@ -245,10 +240,6 @@ public class WSD {
                                 // it's the first time we train for the
                                 // lemma:
                                 List<String> list = classes.get(ambiguity.getLemma());
-                                // int size = 1;
-                                // for (int i : structure) {
-                                // size = size * i;
-                                // }
                                 tree = weka ? new WekaClassifier(list, structure[0])
                                         : new BayesTree(structure, patternFactor, list);
                                 lexicon.put(ambiguity.getLemma(), tree);
@@ -265,11 +256,10 @@ public class WSD {
                             // train the applicable tree:
                             tree.train(features, ambiguity.getCorrect());
                         }
-                        // done training one sense, reset counters:
+                        // done training one sense:
                         if (ClassifierPreferences.getInstance().debug) {
-                            System.err.println("Training reset.");
+                            System.err.println("Training sense done.");
                         }
-//                        tree.reset();
                     }
 
                 }
@@ -284,9 +274,6 @@ public class WSD {
             threads.add(thread);
 
         }
-        // try {
-        // wait until all running threads are done:
-        // Thread.currentThread().wait();
         System.out.print("Trained networks with " + lists.keySet().size() + " lemmata, "
                 + samples.size() + " samples...");
         if (ClassifierPreferences.getInstance().parallel)
@@ -294,17 +281,11 @@ public class WSD {
                 try {
                     Thread.sleep(500);
                 } catch (InterruptedException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
             }
         long l = System.currentTimeMillis() - start;
         System.out.print(" took " + l + " ms. (" + l / 1000 + " sec.)" + "\n");
-        // this.notify();
-        // } catch (InterruptedException e1) {
-        // e1.printStackTrace();
-        // }
-
     }
 
     private boolean allDone(List<Thread> threads) {
@@ -335,14 +316,6 @@ public class WSD {
         return maps;
     }
 
-    // private boolean allTrained() {
-    // for (BayesTree tree : lexicon.values()) {
-    // if (!tree.trained)
-    // return false;
-    // }
-    // return true;
-    // }
-
     public void disambiguate(List<Ambiguity> samples) throws IOException {
         String out = "files/senseval.result";
         BufferedWriter fw = new BufferedWriter(new FileWriter(out));
@@ -354,8 +327,6 @@ public class WSD {
             Thread thread = new Thread(new Runnable() {
                 public void run() {
                     Map<String, List<Ambiguity>> map = lists.get(lemma);
-                    // System.out.println("Disambiguating "+ map.keySet().size()
-                    // + " different senses of lemma: " + lemma);
                     for (final String sense : map.keySet()) {
                         List<Ambiguity> name = map.get(sense);
                         WsdClassifier tree = lexicon.get(lemma);
@@ -365,7 +336,6 @@ public class WSD {
                         System.out.println("\tDisambiguating " + name.size() + " instances of "
                                 + lemma);
                         for (Ambiguity ambiguity : name) {
-                            // tree.classified = false;
                             float[] features = feat.getFeatures(ambiguity.getContext().target,
                                     ambiguity.getContext().all, tree.featureSize());
 
@@ -381,9 +351,6 @@ public class WSD {
                                                 ClassifierPreferences.getInstance().digits) + " as: ");
                                 System.out.println(result);
                             }
-                            // FIXME else all result tend to become the same,
-                            // but like this we have no continuous input:
-                            //tree.resetClassify(); // now internally different stuff for each sense
                         }
                         // after classifying all instances of a sense, we clear
                         // input sensors (discourse change)
@@ -395,9 +362,6 @@ public class WSD {
                 }
             });
             // we train all samples for each lemma in a thread of its own:
-            // System.out.println("Spinning thread for classifying instances of:
-            // "
-            // + lemma);
             if (ClassifierPreferences.getInstance().parallel)
                 thread.start();
             else
@@ -405,25 +369,17 @@ public class WSD {
             threads.add(thread);
 
         }
-        // try {
         System.out.print("For " + lists.keySet().size() + " lemmata, classified " + samples.size()
                 + " instances...");
-        // wait until all running threads are done:
-        // Thread.currentThread().wait();
         while (!(allDone(threads) && threads.size() == lists.keySet().size())) {
             try {
                 Thread.sleep(500);
             } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }
         long l = System.currentTimeMillis() - start;
         System.out.print(" took " + l + " ms. (" + l / 1000 + " sec.)" + "\n");
-        // this.notify();
-        // } catch (InterruptedException e1) {
-        // e1.printStackTrace();
-        // }
         // The Senseval scoring app requires sorted output:
         Collections.sort(results);
         for (String r : results) {
@@ -436,12 +392,4 @@ public class WSD {
                         + "\n(see http://www.senseval.org/senseval3/scoring for usage)\n"
                         + "_____________________________________________________________________");
     }
-
-    // private boolean allClassified() {
-    // for (BayesTree tree : lexicon.values()) {
-    // if (!tree.classified)
-    // return false;
-    // }
-    // return true;
-    // }
 }

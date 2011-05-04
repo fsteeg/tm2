@@ -20,8 +20,6 @@ import java.util.Set;
 import com.quui.tm2.agents.features.suffixtree.node.NodeAccessor;
 import com.quui.tm2.agents.features.suffixtree.node.SimpleNodeAccessor;
 
-
-
 /**
  * TODO implement adding of texts atfer instantiation for more flexibility
  * 

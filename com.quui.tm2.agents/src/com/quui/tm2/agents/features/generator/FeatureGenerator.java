@@ -6,7 +6,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.SortedSet;
 import java.util.Vector;
 
@@ -20,7 +19,6 @@ import java.util.Vector;
  * 
  */
 public class FeatureGenerator {
-	// int contextSize;
 
 	List<String> text;
 
@@ -62,15 +60,13 @@ public class FeatureGenerator {
 	    configString = features;
 		Collections.sort(vocabulary);
 		this.context = context;
-		// List<String> arrayList = new ArrayList<String>(vocabulary);
 		this.words = new HashMap<String, Integer>();
-		nGram = features.contains("gram");// equals(Keys.FEATURE_TRIGRAM.key);
+		nGram = features.contains("gram");
 		paradigms = features.equals("paradigms");
 		if (features.equals("combo")) {
 			paradigms = true;
 			// TODO implement combo with feature-specification in properties
 			// file like this: word,3-gram,paradigms
-			// nGramNum = 3;
 		} else if (nGram) {
 			nGramNum = Integer.parseInt(features.split("-")[0]);
 			// see below
@@ -82,22 +78,13 @@ public class FeatureGenerator {
 			}
 			paradigmsWalker = new ParadigmsWalker(clean(buf.toString()));
 			assignValues(paradigmsWalker.paradigms);
-			// SortedSet<Paradigm> pardigmsInText = p.pardigmsInText;
-			// for (Paradigm paradigm : pardigmsInText) {
-			// System.out.println(paradigm.members + "\n\t(" + paradigm.value
-			// + ")");
-			// }
-
 		}
-		if (features.equals("word") || features.equals("length")) { // word
-			// based
-			// features
+		if (features.equals("word") || features.equals("length")) { 
+		  // word based features
 			int i = 0;
-//			System.out.println();
 			for (String s : vocabulary) {
 				boolean length = features.equals("length");
 				int x = (length ? s.length() : i);
-				// System.out.println("ADDING WORD: " + s);
 				if (!words.keySet().contains(s)) {
 					words.put(s, x);
 					max = (length ? Math.max(max, x) : i);
@@ -109,14 +96,10 @@ public class FeatureGenerator {
 		}
 		List<String> l = new Vector<String>(words.keySet());
 		Collections.sort(l);
-//		for (String k : l) {
-//			System.out.println(k + ", " + (words.get(k)/(double)max));
-//		}
 	}
 
 	private void assignValues(SortedSet<Paradigm> sortedSet) {
 		int c = 1;
-		// Collections.sort(sortedSet);
 		int max = sortedSet.size();
 		for (Paradigm paradigm : sortedSet) {
 			paradigm.value = 1.0f / max * c;
@@ -189,24 +172,6 @@ public class FeatureGenerator {
 								: wordFeature(string);
 			}
 		}
-
-		// }
-		// else {
-		//
-		// int count = 1;
-		// // fill before target word
-		// for (int i = contextSize - 1; i >= 0 && (wordPos - count) >= 0
-		// && count <= contextSize; i--, count++) {
-		// features[i] = wordFeature(wordPos - count, text);
-		// }
-		// count = 1;
-		// // fill after target word
-		// for (int i = contextSize; i < features.length
-		// && (wordPos + count) < text.size() && count <= contextSize; i++,
-		// count++) {
-		// features[i] = wordFeature(wordPos + count, text);
-		// }
-		// }
 		return features;
 	}
 
@@ -234,23 +199,6 @@ public class FeatureGenerator {
 		feature = nGram ? nGramFeature(w, max, start)
 				: paradigms ? paradigmFeature(w) : wordFeature(w);
 
-		// }
-		// else {
-		//
-		// int count = 1;
-		// // fill before target word
-		// for (int i = contextSize - 1; i >= 0 && (wordPos - count) >= 0
-		// && count <= contextSize; i--, count++) {
-		// features[i] = wordFeature(wordPos - count, text);
-		// }
-		// count = 1;
-		// // fill after target word
-		// for (int i = contextSize; i < features.length
-		// && (wordPos + count) < text.size() && count <= contextSize; i++,
-		// count++) {
-		// features[i] = wordFeature(wordPos + count, text);
-		// }
-		// }
 		return feature;
 	}
 
@@ -258,15 +206,12 @@ public class FeatureGenerator {
 		List<Paradigm> hits = retrieveHits(w);
 		if (hits == null) {
 			return 0f;
-			// throw new IllegalStateException("No Paradigm found for: " +
-			// text2.get(i));
 		}
 		float sum = 0.0f;
 		for (Paradigm paradigm : hits) {
 			sum += paradigm.value;
 		}
 		float d = sum / hits.size();
-		// System.err.println("Para feature using: " + d);
 		return d;
 	}
 
@@ -301,13 +246,8 @@ public class FeatureGenerator {
 			while (ngram.length() < nGramNum) {
 				ngram = ngram + ngram;
 			}
-			// }
-			// for (int i = 0; i < nGramNum; i++) {
-			// ngram = ngram + ngram;
-			// }
 			ngram = ngram.substring(0, nGramNum);
 		}
-		// System.err.println("n-gram:" + ngram);
 		Integer integer = code(ngram);// ngram.hashCode();
 		return (float) (integer - code(start)/* .hashCode() */) / max;
 	}

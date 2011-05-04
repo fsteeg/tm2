@@ -47,7 +47,6 @@ public class WordSuffixTree extends AlphanumericSuffixTree {
     public WordSuffixTree(String text, boolean reverse, boolean generalized,
             NodeAccessor accessor) {
         super(text, reverse, generalized, accessor);
-        // TODO Auto-generated constructor stub
     }
 
     /**
@@ -82,7 +81,8 @@ public class WordSuffixTree extends AlphanumericSuffixTree {
         if (!generalized)
             sentencesSet.add(text);
         // else we'll split it into sentences and later add these separately
-        // (FIXME this currently give runtime problems, turn quadratic)
+        // (FIXME this causes runtime problems, turns generalized trees quadratic, see runtime for generalized suffix tree, see gusfield,
+        // page 116)
         else {
             for (String s : sentences) {
                 if (!s.equals(" "))
@@ -90,7 +90,6 @@ public class WordSuffixTree extends AlphanumericSuffixTree {
             }
         }
         /** step 2: number those types */
-//        System.out.print(sentencesSet.size() + " Sentences, ");
         int sentenceCount = 1;
         List<Long> all = new ArrayList<Long>();
         for (String sentence : sentencesSet) {
@@ -139,8 +138,6 @@ public class WordSuffixTree extends AlphanumericSuffixTree {
              * step 4: build a traditional suffix tree for the string of
              * numbers:
              */
-//            super.addSequences(builder, sentenceCount, false);
-            
             all.addAll(seq);
             all.add(NumericSuffixTree.TERMINATION_SYMBOL);
             
@@ -148,16 +145,12 @@ public class WordSuffixTree extends AlphanumericSuffixTree {
             sentenceCount++;
         }
         super.addSequences(all, sentenceCount, false);
-//        System.out.print(counter + " Types.");
-//        System.out.println();
 
         /**
          * step 5: expand the tree for words: not present, the tree takes care
          * of the translation on request, using the map
          */
 
-        // TODO fix quadratic runtime for generalized suffix tree, see gusfield,
-        // page 116
     }
 
     /**

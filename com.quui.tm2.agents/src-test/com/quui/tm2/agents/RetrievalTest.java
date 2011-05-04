@@ -46,8 +46,6 @@ public class RetrievalTest {
          * Search in the results of Gazetteer for organization keys and return corresponding results
          * of the tokenizer (i.e. find words that are organization keys):
          */
-        // List<String> result1 = r.searchValues(Gazetteer.class, "org_key",
-        // Tokenizer.class);
         List<Annotation<String>> result0 = r.search(Gazetteer.class, "organization_nouns",
                 Tokenizer.class);
         /* For a CLI or GUI usgae, we would need to give strings as parameters: */

@@ -27,10 +27,6 @@ public final class BatchTest {
     /***/
     private static final String E2 = "e2";
 
-    /***/
-    // private static final String CORPUS = ROOT + "files/Corpus";
-    /***/
-    // private static final String OUTPUT = ROOT + "output/Result";
     /**
      * @throws URISyntaxException
      * @throws MalformedURLException
@@ -38,7 +34,6 @@ public final class BatchTest {
     @Test
     public void batch() throws MalformedURLException, URISyntaxException {
         // Create two experiments:
-
         /*
          * Here, we use the factory: the good: we don't need to redundantly
          * specify the parameter; the bad: type inference won't work if we
@@ -56,17 +51,11 @@ public final class BatchTest {
          * are invariant. If we had a bound, we could use a wildcard like ?
          * extends T but we use an unbounhded wildcard in the factory...
          */
-
         Experiment e1 = new Experiment.Builder().name(E1).root(ROOT).analysis(i1)
                 .analysis(i2).build();
-
         Experiment e2 = new Experiment.Builder().name(E2).root(ROOT).analysis(i1)
                 .analysis(i2).build();
         // Run them in a batch:
-        /*
-         * TODO throws exceptions, probably as we share the interaction... needs
-         * to be immutable!
-         */
         Batch.run(e1, e2);
         assertTrue("No result for 1;", new File(new URL(e1
                 .getOutputAnnotationLocation()).toURI()).exists());

@@ -38,7 +38,6 @@ public class SensevalTest {
 						+ s.substring(sample.context.targetStart,
 								sample.context.targetEnd));
 			} catch (StringIndexOutOfBoundsException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -66,24 +65,11 @@ public class SensevalTest {
 			while (s.hasNextLine()) {
 				builder.append(s.nextLine() + "\n ");
 			}
-			// System.out.println("TEXT: " + builder.toString());
 			return builder.toString();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
-
-	// @Test
-	// public void evaluateSmall(){
-	// new SensevalEvaluation("senseval/EnglishLS.train-small.xml",
-	// "senseval/EnglishLS.test-small.xml").evaluate();
-	// }
-	//	
-	// @Test
-	// public void evaluateFull(){
-	// new SensevalEvaluation("senseval/EnglishLS.train.xml",
-	// "senseval/EnglishLS.test.xml").evaluate();
-	// }
 
 }

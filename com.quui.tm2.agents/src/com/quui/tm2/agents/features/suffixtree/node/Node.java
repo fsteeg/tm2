@@ -2,37 +2,32 @@ package com.quui.tm2.agents.features.suffixtree.node;
 
 import java.util.List;
 
-
 public interface Node {
 
-	public static final int A_LEAF = -1;
-	
-	long getId();
-	
-	int getTextNumber();
+  public static final int A_LEAF = -1;
 
-	int getLabelStart();
-    
-    void setLabelStart(int s);
+  long getId();
 
-	int getLabelEnd();
-    
-    void setLabelEnd(int end);
+  int getTextNumber();
 
-	int[] getAdditionalLabels();
-    
-    void setAdditionalLabels(int[] labels);
+  int getLabelStart();
 
-	//HashMap<Long, Node> getChildren();
+  void setLabelStart(int s);
 
-	int getSuffixIndex();
+  int getLabelEnd();
 
-	int getDfs();
+  void setLabelEnd(int end);
 
-    List<Node> getChildren();
+  int[] getAdditionalLabels();
 
-    boolean isInternal();
-	
+  void setAdditionalLabels(int[] labels);
+
+  int getSuffixIndex();
+
+  int getDfs();
+
+  List<Node> getChildren();
+
+  boolean isInternal();
+
 }
-
-

@@ -7,8 +7,8 @@ import java.util.List;
 public class FeatureVector implements Comparable<FeatureVector>, Serializable {
 
     private List<Float> values = new ArrayList<Float>();
-	public String lemma;
-	public String id;
+    public String lemma;
+    public String id;
 
     public FeatureVector(float[] fs, String lemma, String id) {
     	this.lemma = lemma;
@@ -17,16 +17,6 @@ public class FeatureVector implements Comparable<FeatureVector>, Serializable {
             values.add(f);
         }
     }
-
-    // TODO toString, construct from String FIXME not cool
-
-//    public FeatureVector(String input) {
-//        this.values = new ArrayList<Float>();
-//        char[] charArray = input.toCharArray();
-//        for (char c : charArray) {
-//            values.add((float) c);
-//        }
-//    }
 
     /***/
     private static final long serialVersionUID = 5005010477393474435L;

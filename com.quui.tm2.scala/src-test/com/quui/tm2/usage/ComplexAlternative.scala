@@ -1,7 +1,7 @@
 package com.quui.tm2.usage
 /** The agents we use are mostly Java implementations of the Agent interface: */
 import com.quui.tm2.agents._
-import com.quui.tm2.spec.AmasSpec
+import com.quui.tm2.spec.Tm2Spec
 /** But not all: */
 import com.quui.tm2.agents._
 /** Import the implicit conversion from Agent to RichAgent, to add support for the DSL syntax: */

@@ -40,8 +40,6 @@ public class WSDMiniTests {
 		WSD wsd = new WSD(vocabulary, new int[] { 8,4 }, 0.25f, senses, "word", 4);
 		wsd.trainText(Arrays.asList(trainingCorpus.split(split)));
 		wsd.disambiguateText(Arrays.asList(classificationCorpus.split(split)));
-//		GraphvizExport.export(wsd.treeForLemma("Bank").getRoot(),
-//				"files/htm.dot", Preferences.getInstance().digits, true);
 	}
 
 	@Test
@@ -66,37 +64,7 @@ public class WSDMiniTests {
 		WSD wsd = new WSD(vocabulary, new int[] { 4, 2 }, 1, senses, "word", 4);
 		wsd.trainText(Arrays.asList(trainingCorpus.split(split)));
 		wsd.disambiguateText(Arrays.asList(classificationCorpus.split(split)));
-//		GraphvizExport.export(wsd.treeForLemma("Apache").getRoot(),
-//				"files/htm.dot", Preferences.getInstance().digits, true);
 	}
-
-	// @Test
-	// public void testWSDMini2() {
-	// String split = "[^a-zA-Z0-9:;]";
-	// String trainingCorpus = "Bei der Bank:S0 das ab."
-	// + "Die eine Bank:S0 schon zu."
-	// + "Jenseits irgendeiner Bank:S1 irgendeines Gartenteichs."
-	// + "Jedwede erfreuliche Bank:S1 andererseits Mittelerdes.";
-	//
-	// String classificationCorpus = "Dieseundandere andere Bank:S0 schon zu."
-	// + "So verzierte Bank:S1 kommendaus Anadalusien."
-	// + "Atemberaubende uraltgreisenhafte Bank:S1 himmelwaerts gefahren."
-	// + "Eine coolste Bank:S0 ja zu.";
-	//
-	// List<String> vocabulary = new ArrayList<String>(Arrays
-	// .asList((trainingCorpus + " " + classificationCorpus)
-	// .split(split)));
-	// List<String> s = Arrays.asList(new String[] { "S0", "S1" });
-	// Map<String,List<String>> senses = new HashMap<String,List<String>>();
-	// senses.put("Bank", s);
-	// WSD wsd = new WSD(vocabulary, new int[] { 2, 2 }, 2, senses, "word", 2);
-	// wsd.trainText(Arrays.asList(trainingCorpus.split(split)));
-	// wsd.disambiguateText(Arrays.asList(classificationCorpus.split(split)));
-	//
-	// GraphvizExport.export(wsd.treeForLemma("Bank").getRoot(),
-	// "output/htm.dot", Preferences
-	// .getInstance().digits);
-	// }
 
 	@Test
 	public void testWSDMini3() {
@@ -120,8 +88,6 @@ public class WSDMiniTests {
 		WSD wsd = new WSD(vocabulary, new int[] { 2, 4 }, 1, senses, "word", 4);
 		wsd.trainText(Arrays.asList(trainingCorpus.split(split)));
 		wsd.disambiguateText(Arrays.asList(classificationCorpus.split(split)));
-//		GraphvizExport.export(wsd.treeForLemma("Bank").getRoot(),
-//				"files/htm.dot", Preferences.getInstance().digits, true);
 	}
 
 	@Test
@@ -146,34 +112,6 @@ public class WSDMiniTests {
 		WSD wsd = new WSD(vocabulary, new int[] { 4,2 }, 1, senses, "3-gram", 4);
 		wsd.trainText(Arrays.asList(trainingCorpus.split(split)));
 		wsd.disambiguateText(Arrays.asList(classificationCorpus.split(split)));
-//		GraphvizExport.export(wsd.treeForLemma("bank").getRoot(),
-//				"files/htm.dot", Preferences.getInstance().digits, true);
 	}
 
-	// @Test
-	// public void testWSDMini4() {
-	// String split = "[^a-zA-Z0-9:;]";
-	// String trainingCorpus = "Ich hole Geld bei der Bank:S0 in der Stadt ab."
-	// + "Die eine Bank:S0 schon zu."
-	// + "Jenseits irgendeiner Bank:S1 irgendeines Gartenteichs."
-	// + "Jedwede erfreuliche Bank:S1 andererseits Mittelerdes.";
-	//
-	// String classificationCorpus = "Dieseundandere andere Bank:S0 schon zu."
-	// + "So verzierte Bank:S1 kommendaus Anadalusien."
-	// + "Atemberaubende uraltgreisenhafte Bank:S1 himmelwaerts gefahren."
-	// + "Eine coolste Bank:S0 ja zu.";
-	//
-	// List<String> vocabulary = new ArrayList<String>(Arrays
-	// .asList((trainingCorpus + " " + classificationCorpus)
-	// .split(split)));
-	// List<String> s = Arrays.asList(new String[] { "S0", "S1" });
-	// Map<String,List<String>> senses = new HashMap<String,List<String>>();
-	// senses.put("Bank", s);
-	// WSD wsd = new WSD(vocabulary, new int[] { 2, 2 }, 2, senses, "word", 2);
-	// wsd.trainText(Arrays.asList(trainingCorpus.split(split)));
-	// wsd.disambiguateText(Arrays.asList(classificationCorpus.split(split)));
-	// GraphvizExport.export(wsd.treeForLemma("Bank").getRoot(),
-	// "output/htm.dot", Preferences
-	// .getInstance().digits);
-	// }
 }

@@ -30,8 +30,8 @@ object RichSynthesis{
           def info : java.util.List[Agent[_,C]] = backingTraining.info
           def model : Model[V,C] = backingTraining.model
           def apply = { this }
-          def getDataTypeClass:Class[V] = m1.erasure.asInstanceOf[Class[V]] //Class.forName(m.toString).asInstanceOf[Class[T]]
-          def getInfoTypeClass:Class[C] = m2.erasure.asInstanceOf[Class[C]] //Class.forName(m.toString).asInstanceOf[Class[T]]
+          def getDataTypeClass:Class[V] = m1.erasure.asInstanceOf[Class[V]]
+          def getInfoTypeClass:Class[C] = m2.erasure.asInstanceOf[Class[C]]
         } 
       
   def apply = {this}

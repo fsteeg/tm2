@@ -1,5 +1,5 @@
 package com.quui.tm2.spec
-object AmasSpec {
+object Tm2Spec {
   import com.quui.tm2.util.Preferences
   import com.quui.tm2.util.Preferences.Default
   val Corpus = Preferences.get(Default.CORPUS);

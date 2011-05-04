@@ -29,7 +29,6 @@ public class TypeRuntimeTests {
 					public Model<String, Integer> train(
 							List<Annotation<String>> info,
 							List<Annotation<Integer>> data) {
-						// TODO Auto-generated method stub
 						return null;
 					}
 				}).info(new Tokenizer()).data(new Counter()).build();

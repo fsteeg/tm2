@@ -12,6 +12,10 @@ import com.quui.tm2.Model;
 import com.quui.tm2.agents.features.generator.FeatureGenerator;
 import com.quui.tm2.types.FeatureVector;
 
+/**
+ * @author fsteeg
+ *
+ */
 public class Features implements Model<String, String>, Agent<String, FeatureVector> {
 
     private FeatureGenerator generator;
@@ -34,14 +38,12 @@ public class Features implements Model<String, String>, Agent<String, FeatureVec
     public Features(String s) {}
 
     public List<Annotation<FeatureVector>> process(List<Annotation<String>> input) {
-        // System.err.println("Hello process!");
         List<String> strings = Annotations.toValues(new ArrayList<Annotation<String>>(relevantData
                 .values()));
         List<Annotation<FeatureVector>> result = new ArrayList<Annotation<FeatureVector>>();
         for (int i = 0; i < input.size(); i++) {
             FeatureVector vector = new FeatureVector(generator.getFeatures(i, strings, context * 2), 
             		input.get(i).getValue(), null);
-            // System.out.println("Feature vector size: " + vector.getValues().length);
             Annotation<FeatureVector> annotation = ImmutableAnnotation.getInstance(getClass(),
                     vector, input.get(i).getStart(), input.get(i).getEnd());
             result.add(annotation);
@@ -51,7 +53,6 @@ public class Features implements Model<String, String>, Agent<String, FeatureVec
 
     /* @Override */public Model<String, String> train(List<Annotation<String>> data,
             List<Annotation<String>> info) {
-        // System.err.println("Hello training!");
         relevantData = new HashMap<Annotation<String>, Annotation<String>>();
         for (Annotation<String> d : data) {
             for (Annotation<String> i : info) {

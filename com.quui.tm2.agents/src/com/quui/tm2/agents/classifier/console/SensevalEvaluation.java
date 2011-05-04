@@ -35,7 +35,7 @@ public class SensevalEvaluation {
 		List<Ambiguity> samples = trainDataReader.getAmbiguities();
 		List<String> train = trainDataReader.getWords();
 
-		// TODO hm die brauch ich doch nicht... korrekt?
+		// TODO use these?
 		Map<String, String> stems = trainDataReader.getStems();
 
 		Map<String, List<String>> senses = trainDataReader.getSenses();
@@ -53,14 +53,11 @@ public class SensevalEvaluation {
 		WSD wsd = new WSD(arrayList, senses);
 		wsd.train(samples);
 		System.out.println("Training done, disambiguating testing samples...");
-//		GraphvizExport.export(wsd.lexicon.values().iterator().next().getRoot(),
-//				"files/htm.dot", Preferences.getInstance().digits, false);
 
 		try {
 			wsd.disambiguate(testDataReader.getAmbiguities());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		// System.out.println("Disambiguation done.");
 	}
 }

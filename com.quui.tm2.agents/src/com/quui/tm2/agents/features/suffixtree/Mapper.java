@@ -14,8 +14,6 @@ import com.quui.tm2.agents.features.suffixtree.node.Node;
 import com.quui.tm2.agents.features.suffixtree.node.NodeAccessor;
 import com.quui.tm2.agents.features.suffixtree.node.SuffixNode;
 
-
-
 /**
  * Mapping of symbols in texts to symbols in the tree. Also provides the
  * dot-output.
@@ -25,9 +23,6 @@ import com.quui.tm2.agents.features.suffixtree.node.SuffixNode;
  */
 public class Mapper {
     private Map<Long, String> map;
-
-    // these are for dot output
-    // private int count = 1;
 
     private NumericSuffixTree tree;
 
@@ -123,8 +118,6 @@ public class Mapper {
             throws IOException {
         tab(writer, depth);
         List<Node> parents = accessor.getParents(root);
-        // accessor.setId(root,count);
-        // root.id = count;
         if (parents != null) {
             for (Node node : parents) {
                 String string = node.getId() + "->" + root.getId() + "\n";
@@ -136,30 +129,19 @@ public class Mapper {
                         + getTranslatedEdgeLabel(root).toString().trim()
                         + ",\\n Text: " + root.getTextNumber() + ", Suffix: "
                         + ((Node) root).getSuffixIndex() + "\"];\n");
-//                if(root.getAdditionalLabels() != null){
-//                    
-//                    System.out.println("Drawing...");
-//                    for (int i : root.getAdditionalLabels()) {
-//                        System.out.println(i);
-//                    }
-//                }
             }
         }
         Iterator iterator;
         if (list == null) {
             list = new ArrayList<Node>();
-            // count = 1;
         }
         if (!leavesOnly || (leavesOnly && accessor.isTerminal(root)))
             list.add(root);
         if (!accessor.isTerminal(root)) {
             iterator = accessor.getChildren(root).values().iterator();
-            // writer.write("\n");
             depth = depth + 1;
-            // last = count;
             while (iterator.hasNext()) {
                 Node next = (Node) iterator.next();
-                // count++;
                 list = printDotBody(next, list, leavesOnly, writer, depth);
             }
         }

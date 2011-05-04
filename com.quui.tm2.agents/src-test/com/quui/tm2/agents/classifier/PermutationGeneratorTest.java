@@ -1,5 +1,6 @@
 package com.quui.tm2.agents.classifier;
 
+import static org.junit.Assert.*;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Set;
@@ -13,13 +14,13 @@ import com.quui.tm2.agents.classifier.bayestree.permutations.RecursivePermutatio
 public class PermutationGeneratorTest {
 	@Test
 	public void permutations() {
-		Set<String> intPermutations = intPermutations();
+		Set<String> intPermutations = intPermutations(); // see below
 		System.out.println();
 		Set<String> bigPermutations = bigPermutations();
 		System.out.println();
 		Set<String> recPermutations = recPermutations();
-//		assertTrue(intPermutations.equals(recPermutations));
-		assertTrue(recPermutations.equals(bigPermutations));
+		assertEquals(recPermutations,bigPermutations);
+		//	assertEquals(intPermutations,bigPermutations); // TODO fix int-based
 	}
 
 	public Set<String> intPermutations() {

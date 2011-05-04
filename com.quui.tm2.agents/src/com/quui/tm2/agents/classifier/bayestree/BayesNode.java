@@ -237,11 +237,6 @@ class BayesNode {
 
 		// root nodes activate the result from the incoming lambda:
 		else {
-			// System.err.println(ArrayTools.format(lambda,Preferences.getInstance().digits));
-			// if (Preferences.getInstance().debug) {
-			// System.out.print("Lambda in Root: "
-			// + ArrayTools.format(lambda, 3) + " ");
-			// }
 			Float max = Float.MIN_VALUE;
 			int maxIndex = -1;
 			for (int i = 0; i < lambda.length; i++) {
@@ -283,7 +278,6 @@ class BayesNode {
 		}
 		throw new IllegalStateException("Could not create pattern in "
 				+ m.toString() + " with: " + n);
-		// return null;
 	}
 
 	private void train(String activation, String correct) {
@@ -325,9 +319,6 @@ class BayesNode {
 		// the children track the activation of pattern on this level:
 		for (BayesNode n : children) {
 			n.count(this.activation, correct);
-			// if(isRoot()){
-			// System.err.println("Counting Acrtivation: " + this.activation);
-			// }
 		}
 		// recurse upwards in the tree:
 		if (parent != null)

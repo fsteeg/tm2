@@ -6,8 +6,6 @@ import java.util.List;
 
 public class Pseudowords {
 
-//	private Set<String> stopwords;
-
 	public static String split = "[^a-zA-Z0-9:öäüßÖÄÜ-]";
 
 	private String text;
@@ -18,14 +16,6 @@ public class Pseudowords {
 			String stopwordsFile, String stopwordsEncoding) {
 		this.text = text.replaceAll(":", "").replaceAll("-", "");
 		this.context = context/2;
-//		if (filter) {
-//			try {
-//				initStopwords(stopwordsFile, stopwordsEncoding);
-//			} catch (FileNotFoundException e) {
-//				e.printStackTrace();
-//			}
-//			this.text = filter(this.text);
-//		}
 	}
 
 	public String tag(String[] strings) {
@@ -33,7 +23,7 @@ public class Pseudowords {
 		int i = 0;
 		for (String s1 : strings) {
 			String rep = "";
-			//create the pseudoword
+			// create the pseudoword
 			for (String s2 : strings) {
 				rep += s2;
 			}
@@ -41,9 +31,8 @@ public class Pseudowords {
 					+ ":" + "S" + i + " ");
 			i++;
 		}
-		// TODO sauberer machen!
+		// TODO cleanup
 		List<String> words = Arrays.asList(resu.split(split));
-		
 		
 		if(ClassifierPreferences.getInstance().filter){
 			words = StopwordsFilter.getInstance().filter(words);

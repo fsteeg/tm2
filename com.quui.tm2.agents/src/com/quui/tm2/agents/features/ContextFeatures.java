@@ -11,6 +11,10 @@ import com.quui.tm2.agents.features.generator.FeatureGenerator;
 import com.quui.tm2.agents.senseval.Context;
 import com.quui.tm2.types.FeatureVector;
 
+/**
+ * @author fsteeg
+ *
+ */
 public abstract class ContextFeatures implements Agent<Context, FeatureVector> {
 
 	private FeatureGenerator generator;
@@ -36,38 +40,16 @@ public abstract class ContextFeatures implements Agent<Context, FeatureVector> {
 
 	public List<Annotation<FeatureVector>> process(
 			List<Annotation<Context>> input) {
-		// System.err.println("Hello process!");
-		// List<String> strings = Annotations.toValues(new
-		// ArrayList<Annotation<String>>(relevantData
-		// .values()));
 		List<Annotation<FeatureVector>> result = new ArrayList<Annotation<FeatureVector>>();
 		for (int i = 0; i < input.size(); i++) {
-			Context c = input.get(i).getValue();// relevantData.get(input.get(i).getValue());
+			Context c = input.get(i).getValue();
 			FeatureVector vector = new FeatureVector(generator.getFeatures(
 					c.target, c.all, context * 2), c.lemma, c.id);
-			// System.out.println("Feature vector size: " +
-			// vector.getValues().length);
 			Annotation<FeatureVector> annotation = ImmutableAnnotation
 					.getInstance(getClass(), vector, input.get(i).getStart(),
 							input.get(i).getEnd());
-//			System.out.println(annotation);
 			result.add(annotation);
 		}
 		return result;
 	}
-
-	// /* @Override */public Model<String, Context>
-	// train(List<Annotation<String>> data,
-	// List<Annotation<Context>> info) {
-	// // System.err.println("Hello training!");
-	// relevantData = new HashMap<Annotation<String>, Context>();
-	// for (Annotation<String> d : data) {
-	// for (Annotation<Context> i : info) {
-	// if (Annotations.fullOverlap(d, i)) {
-	// relevantData.put(d, i.getValue());
-	// }
-	// }
-	// }
-	// return this;
-	// }
 }

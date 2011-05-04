@@ -3,9 +3,18 @@ package com.quui.tm2.agents.senseval;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * @author fsteeg
+ *
+ */
 public class Context implements Comparable<Context>, Serializable {
 
-	public int contextEnd;
+	/**
+   * 
+   */
+  private static final long serialVersionUID = -2753606175812943929L;
+
+  public int contextEnd;
 
 	public int contextStart;
 

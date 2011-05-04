@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Amas
+Bundle-Name: TM2
 Bundle-SymbolicName: com.quui.tm2
 Bundle-Version: 1.0.0
 Bundle-ClassPath: amas.jar,
@@ -46,7 +46,6 @@ Export-Package: com.ctc.wstx.api,
  com.quui.qlog.core.log4j,
  com.quui.tm2,
  com.quui.tm2.doc,
- com.quui.tm2.lab,
  com.quui.tm2.types,
  com.quui.tm2.ui,
  com.quui.tm2.util,

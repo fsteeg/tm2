@@ -37,8 +37,8 @@ class WsdUsage extends Spec with ShouldMatchers {
         new Gold,
         new Tokenizer,
         new SimpleEvaluation[String])
-      val (features, classifier) = (new Features(new ArrayList(List() ++ Set() ++ corpus.text.split(Pseudowords.split)), "3-gram", 4),
-        new Classifier(asList(8), 1f, new SMO, "S0", "S1"))
+      val (features, classifier) = (new Features(new ArrayList(List() ++ Set() ++ corpus.text.split(Pseudowords.split)), "paradigms", 4), // paradigms -> suffix-tree-based
+        new Classifier(asList(8), 1f, /*new SMO*/null, "S0", "S1")) // null -> BayesTree
 
       print(String.format(
         "Exp with corpus [%s], ambiguity [%s], gold [%s], tokenizer [%s], features [%s] " +

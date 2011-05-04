@@ -68,8 +68,6 @@ public abstract class SuffixNode implements Node{
      */
     public abstract Node getChild(Long i);
 
-    // abstract void addChild(SuffixTree tree, int i, SuffixNode n);
-
     /**
      * Returns the parent of this node, null if it's the root.
      * 

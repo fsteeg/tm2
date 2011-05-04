@@ -1,8 +1,6 @@
 package com.quui.tm2;
 
 import java.io.Serializable;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -13,9 +11,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
 
-import sun.reflect.generics.reflectiveObjects.TypeVariableImpl;
-
-import com.quui.tm2.util.AmasLogger;
+import com.quui.tm2.util.TM2Logger;
 
 /**
  * @author Fabian Steeg (fsteeg)
@@ -286,7 +282,7 @@ final class InteractionRunnable<T extends Comparable<T> & Serializable>
 	/***/
 	private final List<Annotation<T>> input;
 	/***/
-	private final Logger logger = AmasLogger.singleton();
+	private final Logger logger = TM2Logger.singleton();
 	/***/
 	private final Map<Class<? extends Agent<?, ?>>, List<Annotation<?>>> blackboard;
 	/***/

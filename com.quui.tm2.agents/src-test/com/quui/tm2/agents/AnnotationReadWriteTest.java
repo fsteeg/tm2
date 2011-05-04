@@ -17,11 +17,9 @@ import com.quui.tm2.Annotation;
 import com.quui.tm2.AnnotationReader;
 import com.quui.tm2.AnnotationWriter;
 import com.quui.tm2.ImmutableAnnotation;
-import com.quui.tm2.agents.Counter;
-import com.quui.tm2.agents.Gazetteer;
-import com.quui.tm2.util.AmasLogger;
 import com.quui.tm2.util.Preferences;
 import com.quui.tm2.util.Preferences.Default;
+import com.quui.tm2.util.TM2Logger;
 
 public class AnnotationReadWriteTest {
 
@@ -55,7 +53,7 @@ public class AnnotationReadWriteTest {
                 location + ".xml").readAnnotations(agentClass);
         assertTrue("Reader did not return any annotations;",
                 annotations.size() > 0);
-        AmasLogger.singleton(getClass()).info(
+        TM2Logger.singleton(getClass()).info(
                 "We have " + annotations.size() + " annotation for "
                         + agentClass);
         for (Annotation<T> annotation : annotations) {

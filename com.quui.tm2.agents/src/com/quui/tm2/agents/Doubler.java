@@ -8,7 +8,7 @@ import com.quui.tm2.Annotation;
 import com.quui.tm2.ImmutableAnnotation;
 
 /**
- * A pointless Agent that should demonstrate framework usage.
+ * An agent to demonstrate framework usage.
  * @author fsteeg
  */
 public final class Doubler implements Agent<Integer, Integer> {

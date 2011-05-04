@@ -16,17 +16,15 @@ import org.apache.log4j.Logger;
  */
 public class DotDrawer {
 
-    // some config values
-
-    public String DOT_CALL = "dot"; //$NON-NLS-1$
+    public String DOT_CALL = "dot";
 
     private String OUTPUT_FORMAT = "-T";
 
     public final String VAR = "-o";
 
-    public String RESULT_PNG; //$NON-NLS-1$
+    public String RESULT_PNG;
 
-    public String DOT_FILE; //$NON-NLS-1$
+    public String DOT_FILE;
 
     public String DOT_APP_PATH;
 
@@ -34,9 +32,9 @@ public class DotDrawer {
 
     String[] COMMANDS;
 
-    private static final String CAPTION_DOT_SELECT_SHORT = "Short"; //$NON-NLS-1$
+    private static final String CAPTION_DOT_SELECT_SHORT = "Short";
 
-    private static final String CAPTION_DOT_SELECT_LONG = "Long"; //$NON-NLS-1$
+    private static final String CAPTION_DOT_SELECT_LONG = "Long";
 
     private String INPUT_FOLDER = null;
 
@@ -50,8 +48,8 @@ public class DotDrawer {
      */
     public DotDrawer(String inputFolder, String outputFolder, String in,
             String out, String dotLocation) {
-        OUTPUT_FOLDER = outputFolder;// + File.separator;
-        INPUT_FOLDER = inputFolder;// + File.separator;
+        OUTPUT_FOLDER = outputFolder;
+        INPUT_FOLDER = inputFolder;
         DOT_FILE = in;
         RESULT_PNG = out;
         DOT_APP_PATH = dotLocation;
@@ -69,7 +67,7 @@ public class DotDrawer {
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
-        logger = AmasLogger.singleton(this.getClass());
+        logger = TM2Logger.singleton(this.getClass());
     }
 
     /**
@@ -97,7 +95,7 @@ public class DotDrawer {
             x.printStackTrace();
         }
         int exitValue = p.exitValue();
-        logger.debug("Exit status: " + exitValue); //$NON-NLS-1$
+        logger.debug("Exit status: " + exitValue);
         if (exitValue != 0) { throw new IllegalStateException(String.format(
                 "Unsucessful DOT call '%s', resulted in error code: %s", Arrays
                         .asList(COMMANDS), exitValue)); }

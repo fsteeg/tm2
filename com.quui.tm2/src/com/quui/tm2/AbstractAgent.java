@@ -29,7 +29,7 @@ public abstract class AbstractAgent<I extends Comparable<I> & Serializable, O ex
     public final List<Annotation<O>> process(final List<Annotation<I>> input) {
         List<Annotation<O>> result = new ArrayList<Annotation<O>>();
         for (Annotation<I> annotation : input) {
-            @SuppressWarnings( "unchecked" )// We are AbstractAgent<I,O>, should be safe
+            @SuppressWarnings( "unchecked" ) // We are AbstractAgent<I,O>, should be safe
             Class<? extends AbstractAgent<I, O>> author = (Class<? extends AbstractAgent<I, O>>) getClass();
             Annotation<O> resultAnnotation = ImmutableAnnotation.getInstance(author, // TODO not convenient for API!
                     process(annotation.getValue()), annotation.getStart(), annotation.getEnd());

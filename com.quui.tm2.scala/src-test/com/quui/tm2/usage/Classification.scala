@@ -15,7 +15,7 @@ object Classification extends Application {
   for {
     /** The different configs: */
     
-    text <- List(com.quui.tm2.spec.AmasSpec.Corpus, com.quui.tm2.spec.AmasSpec.Corpus)
+    text <- List(com.quui.tm2.spec.Tm2Spec.Corpus, com.quui.tm2.spec.Tm2Spec.Corpus)
     feat <- List("Term", "Vector")
     algo <- List("NaiveBayes", "SVM")
     
@@ -34,7 +34,6 @@ object Classification extends Application {
       c_feat -> c_clas )
     .name("Classification experiment with " 
            + feat + ", " + algo)
-//      text(text)//? "Correct.xml"
     
   } yield x.run
 }

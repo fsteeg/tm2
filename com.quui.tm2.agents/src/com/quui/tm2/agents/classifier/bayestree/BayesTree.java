@@ -42,10 +42,6 @@ public class BayesTree implements WsdClassifier{
 
 	private List<List<String>> allLanguages;
 
-	// boolean trained = false;
-
-	// public boolean classified = false;
-
 	/**
 	 * @param layers
 	 *            The layers the tree should have (root is 0)
@@ -78,7 +74,6 @@ public class BayesTree implements WsdClassifier{
 		for (BayesNode node : leafs) {
 			node.updateCPDs(correct);
 		}
-		// this.trained = true;
 	}
 
 	/**
@@ -87,7 +82,6 @@ public class BayesTree implements WsdClassifier{
 	 * @return Returns the class for the input
 	 */
 	public String classify(float[] input) {
-		// classified = false;
 		if (input.length != this.leafs.size()) {
 			throw new IllegalStateException("Input vector has wrong size: "
 					+ input.length);
@@ -98,21 +92,8 @@ public class BayesTree implements WsdClassifier{
 			node.classify(input[g]);
 			g++;
 		}
-		// classified = true;
 		return root.activation;
 	}
-
-	/**
-	 * Clears the training counters (recursivly, top-down), is called after
-	 * learning for one class is complete
-	 */
-//	public void reset(BayesNode node) {
-//		node.counters = new HashMap<String, Integer>();
-//		node.frequencies = new HashMap<String, Map<String, Integer>>();
-//		for (BayesNode child : node.children) {
-//			reset(child);
-//		}
-//	}
 
 	/**
 	 * @return The tree root node
@@ -207,38 +188,13 @@ public class BayesTree implements WsdClassifier{
 		 * leafs or until max length for others} elements activated
 		 */
 		else {
-			long start = System.currentTimeMillis();
 			PermutationGenerator gen = new RecursivePermutationGenerator();
 			int length = node.children.get(0).language.get(0).length() / 2;
 			lang = new ArrayList<String>(gen.permutations(length, node.children
 					.get(0).isLeaf() ? node.children.size() : length));
-			long end = System.currentTimeMillis() - start;
-//			System.out.println("Took: " + end);
 		}
 		return lang;
 	}
-
-	// private void addElements(double length, int counter, int max,
-	// StringBuilder builder, List<String> words) {
-	// if (builder.length() == length) {
-	// if (builder.toString().contains("1"))
-	// words.add(builder.toString());
-	// } else {
-	// if (counter == max) {
-	// StringBuilder b = new StringBuilder(builder);
-	// for (int j = b.toString().length(); j <= length - 1; j++) {
-	// b.append("0");
-	// }
-	// if (b.toString().contains("1"))
-	// words.add(b.toString());
-	// } else {
-	// addElements(length, counter + 1, max,
-	// new StringBuilder(builder).append("1"), words);
-	// addElements(length, counter, max, new StringBuilder(builder)
-	// .append("0"), words);
-	// }
-	// }
-	// }
 
 	/**
 	 * @param node
@@ -287,12 +243,7 @@ public class BayesTree implements WsdClassifier{
 		return getLeafs().size();
 	}
 
-//	public void reset() {
-//		reset(getRoot());
-//	}
-
 	public void resetClassify() {
 		resetClassify(getRoot());
-		
 	}
 }

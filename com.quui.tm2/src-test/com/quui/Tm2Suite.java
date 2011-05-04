@@ -10,7 +10,6 @@ import org.junit.runners.Suite;
 
 import com.quui.tm2.AnnotationTest;
 import com.quui.tm2.ValidationTest;
-import com.quui.tm2.doc.AgentInfo;
 import com.quui.tm2.doc.AgentInfoTest;
 import com.quui.tm2.util.Preferences;
 import com.quui.tm2.util.Preferences.Default;

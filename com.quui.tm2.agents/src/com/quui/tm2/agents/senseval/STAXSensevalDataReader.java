@@ -116,14 +116,12 @@ public class STAXSensevalDataReader {
 							Elements.CONTEXT.key)) {
 						contextStart = characterOffset
 								+ (Elements.CONTEXT.key.length() + 2);
-						// System.out.println("Context Start: " + contextStart);
 						all = new ArrayList<String>();
 					} else if (reader.getLocalName()
 							.equals(Elements.TARGET.key)) {
 						target = all.size();
 						targetStart = characterOffset
 								+ (Elements.TARGET.key.length() + 2);
-						// System.out.println("Target Start: " + targetStart);
 					}
 				} else if (reader.isCharacters() && !reader.isWhiteSpace()) {
 					context = reader.getText();
@@ -181,7 +179,6 @@ public class STAXSensevalDataReader {
 						correct = new ArrayList<String>();
 					}
 				}
-				// System.out.println("Calling Next!");
 				reader.next();
 			}
 			reader.close();
@@ -193,7 +190,6 @@ public class STAXSensevalDataReader {
 			ambiguity.getContext().senses = senses.get(ambiguity.lemma);
 			 // TODO add senses to context
 		}
-		// return result;
 	}
 
 	public List<Ambiguity> getAmbiguities() {
@@ -228,12 +224,6 @@ public class STAXSensevalDataReader {
 		}
 		return shrinked;
 	}
-
-	// private String word(List<String> vocabulary, int pos) {
-	// String string = vocabulary.toArray(new String[] {})[pos];
-	// String string2 = string.contains(":") ? string.split("-")[0] : string;
-	// return string2;
-	// }
 
 	public Map<String, List<String>> getSenses() {
 		return senses;

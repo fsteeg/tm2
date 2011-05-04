@@ -15,13 +15,9 @@ public class SimpleSequenceAccessor extends ArrayList<Long> implements SequenceA
 		super(initialCapacity);
 	}
 
-
 	public void addAll(List<Long> seq) {
 		super.addAll(seq);
 	}
-
-	
-
 
 }
 

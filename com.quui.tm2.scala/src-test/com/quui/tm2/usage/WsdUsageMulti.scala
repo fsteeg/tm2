@@ -17,7 +17,6 @@ import com.quui.tm2.Batch._
 import java.util.ArrayList
 import com.quui.tm2.spec._
 import com.quui.tm2.Exp._
-//import weka.classifiers._
 import weka.classifiers.bayes._
 import weka.classifiers.functions._
 import weka.classifiers.misc._
@@ -37,13 +36,13 @@ object WsdUsageMulti extends Application {
           ) // TODO "and the in of"
 
         cTrain <- List(
-          AmasSpec.Corpus //,//"http://quui.de/data/faust-1.txt", 
-          //AmasSpec.Corpus)//"http://quui.de/data/faust-2.txt"
+          Tm2Spec.Corpus //,//"http://quui.de/data/faust-1.txt", 
+          //Tm2Spec.Corpus)//"http://quui.de/data/faust-2.txt"
           )
 
         cTest <- List(
-          AmasSpec.Corpus //,//"http://quui.de/data/faust-1.txt", 
-          //AmasSpec.Corpus
+          Tm2Spec.Corpus //,//"http://quui.de/data/faust-1.txt", 
+          //Tm2Spec.Corpus
           ) //"http://quui.de/data/faust-2.txt")
 
         cFeat <- List(
@@ -56,9 +55,7 @@ object WsdUsageMulti extends Application {
 
         cCont <- List[(Int, java.util.List[Integer])](
           (2, java.util.Arrays.asList(4)),
-          (4, java.util.Arrays.asList(8))) //TODO support multi-layer with weka, need context
-        //              (8, java.util.Arrays.asList(2,8)), 
-        //              (8, java.util.Arrays.asList(16)))
+          (4, java.util.Arrays.asList(8)))
 
         pFact <- List(1f) // .5f, 1.5f
 

@@ -12,9 +12,9 @@ import org.junit.Test;
 import com.quui.tm2.Agent;
 import com.quui.tm2.Annotation;
 import com.quui.tm2.AnnotationReader;
-import com.quui.tm2.util.AmasLogger;
 import com.quui.tm2.util.Preferences;
 import com.quui.tm2.util.Preferences.Default;
+import com.quui.tm2.util.TM2Logger;
 
 public class AnnotationReaderTest {
     
@@ -36,7 +36,7 @@ public class AnnotationReaderTest {
         List<Annotation<T>> annotations = new AnnotationReader(location)
                 .readAnnotations(agentClass);
         assertTrue("Reader did not return any annotations;", annotations.size() > 0);
-        AmasLogger.singleton(getClass()).info(
+        TM2Logger.singleton(getClass()).info(
                 "We have " + annotations.size() + " annotation for " + agentClass);
         for (Annotation<T> annotation : annotations) {
             assertTrue("Annotation start and end positions are not correct;", annotation.getStart()

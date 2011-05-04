@@ -4,6 +4,10 @@ import java.util.Iterator;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+/**
+ * @author fsteeg
+ *
+ */
 public class Paradigm implements Comparable<Paradigm> {
 	// members need to be sorted for the compareTo-method to work as implemented
 	SortedSet<String> members = null;

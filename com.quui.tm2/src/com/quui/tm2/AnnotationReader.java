@@ -83,10 +83,6 @@ public/* yes? */class AnnotationReader {
         }
     }
 
-    // public final List<Annotation<?>> readRawAnnotations(
-    // final Class<? extends Agent<?, ?>> agentClass) {
-    // return readAnnotations(agentClass);
-    // }
     /**
      * @param <T> The value type of the annotations to read
      * @param agentClass The class of the agent whose annotation to read
@@ -104,7 +100,7 @@ public/* yes? */class AnnotationReader {
                             && agentClass == null
                             || reader.getAttributeValue(0).equals(
                                     agentClass.getName())) {
-                        /* We wanna read the annotations of this agent: */
+                        /* We want to read the annotations of this agent: */
                         read = true;
                     }
                 }
@@ -226,13 +222,12 @@ public/* yes? */class AnnotationReader {
 		 * hierarchy... or supply a method that does let you
 		 * specify the classes...
 		 */
-
 		Type agentInterface = findAgentInterface(agentClass);
 		if(agentInterface==null){
 			 Exception e = new IllegalArgumentException(
              "Only direct implementations of the Agent interface are supported!");
-			 e.printStackTrace();
-			 return null;
+			 System.err.println(e.getMessage());
+       return null;
 		}
 
 		/*
@@ -306,7 +301,9 @@ public/* yes? */class AnnotationReader {
             return type;
         }
         // FIXME does not work for agents that implement Agent indirectly, impl rec. search?
-        throw new IllegalStateException("No agent interface found for: " + agentClass);
+        IllegalStateException e = new IllegalStateException("No agent interface found for: " + agentClass);
+        System.err.println(e.getMessage());
+        return null;
     }
 
     /**
@@ -364,47 +361,34 @@ public/* yes? */class AnnotationReader {
 
         if (validating) {
             try {
-                URL resource = this.getClass().getResource("amas.xsd");
+                URL resource = this.getClass().getResource("tm2.xsd");
                 if (resource == null) {
                     throw new IllegalStateException("Could not load XSD");
                 }
-                // File f = null;
-                // try {
-                // f = new File(resource.toURI());
-                // } catch (URISyntaxException e) {
-                // f = new File(resource.getPath());
-                // }
-
-                // String loc = resource.getPath();
                 Schema schemaGrammar = schemaFactory.newSchema(resource);
 
                 Validator schemaValidator = schemaGrammar.newValidator();
                 schemaValidator.setErrorHandler(new ErrorHandler() {
 
-                    public void warning(SAXParseException exception)
-                            throws SAXException {
-                    // TODO Auto-generated method stub
-
-                    }
+					public void warning(SAXParseException exception)
+							throws SAXException {
+						System.out.println(exception.getMessage());
+					}
 
                     public void fatalError(SAXParseException exception)
                             throws SAXException {
-                    // TODO Auto-generated method stub
-
+                    	System.out.println(exception.getMessage());
                     }
 
                     public void error(SAXParseException exception)
                             throws SAXException {
-                    // TODO Auto-generated method stub
-
+                    	System.out.println(exception.getMessage());
                     }
                 });
                 schemaValidator.validate(new StreamSource(bufferedReader));
             } catch (SAXException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }
@@ -419,15 +403,6 @@ public/* yes? */class AnnotationReader {
         }
         return newReader;
     }
-
-    // private String string(BufferedReader bufferedReader) {
-    // StringBuilder builder = new StringBuilder();
-    // Scanner s = new Scanner(bufferedReader);
-    // while (s.hasNextLine()) {
-    // builder.append(s.nextLine());
-    // }
-    // return builder.toString();
-    // }
 
     /**
      * @return Returns the data, the actual XML string of annotations

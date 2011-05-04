@@ -10,9 +10,7 @@ class ExperimentInfo {
     List<Analysis<?>> flows = new ArrayList<Analysis<?>>();
     List<Synthesis<?,?>> trains = new ArrayList<Synthesis<?,?>>();
     String title;
-    // String rootLocation;
     String corpusLocation;
-    // String resultDocumentationLocation;
     String resultAnnotationsLocation;
     List<String> agentSources = new ArrayList<String>();
     List<AgentInfo> agentNames = new ArrayList<AgentInfo>();

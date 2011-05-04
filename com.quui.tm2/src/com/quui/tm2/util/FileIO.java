@@ -13,7 +13,7 @@ public class FileIO {
 
     public static String read(String url) {
         try {
-            AmasLogger.singleton(FileIO.class).info(
+            TM2Logger.singleton(FileIO.class).info(
                     "Current directory: " + new File(".").getAbsolutePath());
             Scanner s = new Scanner(new URL(url).openStream());
             String all = "";
@@ -44,7 +44,7 @@ public class FileIO {
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
-        AmasLogger.singleton(FileIO.class).info(
+        TM2Logger.singleton(FileIO.class).info(
                 String.format("Wrote %s chars to %s", html.length(), location));
     }
 

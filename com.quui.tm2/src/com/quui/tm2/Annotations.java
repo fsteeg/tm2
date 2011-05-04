@@ -1,10 +1,12 @@
 package com.quui.tm2;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
+/**
+ * Static helper methods for working with annotations.
+ * @author Fabian Steeg (fsteeg)
+ */
 public class Annotations {
 
     public static <T> List<T> toValues(List<Annotation<T>> input) {
