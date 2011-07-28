@@ -10,27 +10,28 @@ h2. API
 
 TM2 can be used as a regular API from Java, or in a very concise way from Scala, e.g. to define an analysis:
 
-bc. val a: Analysis[Token] = tokenizer -> gazetteer
+<pre lang="scala">val a: Analysis[Token] = tokenizer -> gazetteer</pre>
 
 In a similar way we can define syntheses:
 
-bc. val s: Synthesis[Token, Frequency] = (tokenizer, indexer) -> index
+<pre lang="scala">val s: Synthesis[Token, Frequency] = (tokenizer, indexer) -> index</pre>
 
 With @|@, the interactions can be combined into experiments, which can be executed with @!@:
 
-bc. val e: Experiment = corpus -> tokenizer | tokenizer -> ie !
+<pre lang="scala">val e: Experiment = corpus -> tokenizer | tokenizer -> ie !</pre>
 
 We can combine analyses and syntheses, e.g. to add an evaluation:
 
-bc. val e = corpus -> tok | tok -> (ie, gold) | (ie, gold) -> eval !
+<pre lang="scala">val e = corpus -> tok | tok -> (ie, gold) | (ie, gold) -> eval !</pre>
 
 Combining this Scala API with Scala's general features, we can easily define and run experiments with variable configuration parameters, using this general form:
 
-bc. run { for { <configuration> } yield { <experiment> } }
+<pre lang="scala">run { for { <configuration> } yield { <experiment> } }</pre>
 
 A simple example with two different corpora and two different tokenizers (i.e. 2*2=4 runs) could look like this:
 
-bc. val ie = new Gazetteer
+<pre lang="scala">
+val ie = new Gazetteer
 val gold = new GazetteerGoldStandard
 val eval = new SimpleEvaluation
 run {
@@ -41,10 +42,12 @@ run {
     corpus -> tok | tok -> (ie, gold) | (ie, gold) -> eval
   }
 }
+</pre>
 
 With this syntax we can set up complex experiment series, e.g. training and evaluating a classifier:
 
-bc. val corpus = new Corpus
+<pre lang="scala">
+val corpus = new Corpus
 object trainData extends SensevalData("files/EnglishLS.train.xml")
 object testData extends SensevalData("files/EnglishLS.test.xml")
 object trainSense extends SensevalSense("files/EnglishLS.train.xml")
@@ -74,10 +77,12 @@ run {
     classifier -> evaluation
   }
 }
+</pre>
 
 This setup will run experiments with all permutations of the given configuration parameters (classifiers, features, context, etc.), i.e. here 5*4*3*4=240 runs. The definition above uses Scala's type inference and omits explicit type declarations. They can be used optionally:
 
-bc. val corpus: Agent[String, String] = new Corpus
+<pre lang="scala">
+val corpus: Agent[String, String] = new Corpus
 val trainData: Agent[String, Context] = new TrainData()
 val testData: Agent[String, Context] = new TestData()
 val trainSense: Agent[Context, Ambiguity] = new TrainSense()
@@ -104,14 +109,15 @@ run {
     evaluate: Analysis[Sense] = classifierAgent -> evaluation
   } /* Workflow: */ yield corpusData | corpusContext | trainClassifier | testContext | classify | evaluate
 }
+</pre>
 
 TM will generate some documentation about the experiments and their setup, e.g. for the definitions above we get this overview:
 
-<img src="com.quui.tm2.scala/files/tm2-setup.png" width="400px"/>
+<img src="https://github.com/fsteeg/tm2/raw/master/com.quui.tm2.scala/files/tm2-setup.png" width="400px"/>
 
 For the complete run, an overview page with results is generated:
 
-<img src="com.quui.tm2.scala/files/tm2-result.png" width="600px"/>
+<img src="https://github.com/fsteeg/tm2/raw/master/com.quui.tm2.scala/files/tm2-result.png" width="600px"/>
 
 h2. Prerequisites
 
@@ -126,7 +132,7 @@ h2. Setup
 
 h2. Build
 
-* Build the code and run the tests: @cd com.quui.tm2.scala@; export ANT_OPTS=-Xmx1024m; @ant@
+* Build the code and run the tests: @cd com.quui.tm2.scala@; @export ANT_OPTS=-Xmx1024m@; @ant@
 * Test result reports are generated at @com.quui.tm2.scala/build/tests/scala/summary@
 * Batch documentation is generated at @com.quui.tm2/output/batch-result.html@
 
