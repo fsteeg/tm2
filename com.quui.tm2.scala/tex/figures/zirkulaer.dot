@@ -1,0 +1,14 @@
+digraph{
+rankdir=TD
+node[shape=box width=1.5 style=filled fillcolor=gray95]
+
+TM[label="Text-Mining"]
+Sem[label="Information"]
+Daten[label="Annotierte\nDaten"]
+    
+TM->Daten[dir=back label="sind Input\nfür"]
+TM->Sem[label="ermittelt\naus Daten"]
+Daten->Sem[label="bereichert\nals Metadaten" dir=back arrowhead=none]
+
+
+}

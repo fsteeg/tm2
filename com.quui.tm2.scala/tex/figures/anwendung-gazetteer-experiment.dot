@@ -1,0 +1,28 @@
+
+
+digraph experiment {
+	rankdir=TD
+	node[shape=box style=filled width=1.8]
+	subgraph cluster_0 {
+	
+		subgraph cluster_1932209289 {
+						Gazetteer -> SimpleEvaluation[style=dashed label=" Sense"];
+						Gold -> SimpleEvaluation[style=dashed label=" Sense"]
+						label="Synthesis(Gazetteer,Gold)"
+				  }
+				
+	
+		
+				Corpus -> Tokenizer[style=solid label=" String"]
+		
+				Tokenizer -> Gazetteer[style=solid label=" Token"]
+		
+				Tokenizer -> Gold[style=solid label=" Token"]
+		
+		
+		label="TM2-Experiment:"
+	}
+	eval[style=filled fillcolor=green label="Result:\nf: 1,00 (p: 1,00, r: 1,00)" width=1.5]
+	SimpleEvaluation -> eval[style=dashed arrowhead=open]
+	
+}

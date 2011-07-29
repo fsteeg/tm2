@@ -1,0 +1,12 @@
+digraph io{
+    node[shape=circle style=filled fillcolor=gray95]
+    edge[arrowhead=open]
+    rankdir=LR
+    I[style=invis label=""]
+    T[style=invis label=""]
+    O[style=invis label=""]
+    A[label=""]
+    T->A[label="Daten" style=dashed]
+    I->A[label="Anno-\ntationen"]
+    A->O[label="Annotationen"]
+}

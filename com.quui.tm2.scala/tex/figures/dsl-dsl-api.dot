@@ -1,0 +1,8 @@
+digraph dsl_dsl_api{
+	node[shape=box style=filled fillcolor=gray95]
+	xtext[label="Xtext-DSL"]
+	scala[label="Scala-DSL"]
+	api[label="Java-API"]
+	xtext->api[label="Kompilieren nach Java \n (Xtext-Parser, Xpand-Generator)"]
+	api->scala[dir=back label="API-Nutzung \n (Klassen- und Methodenaufrufe)"]
+}

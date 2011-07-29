@@ -1,0 +1,21 @@
+digraph {
+    node[shape=box style=filled fillcolor=gray95]
+    edge[arrowhead=open]
+    Annotation
+    ID
+    Region
+    Type
+    Content
+    Anchor
+    AnchorID[label="ID"]
+    SignalSet
+    Pair[label="Feature:Value"]
+    Annotation->ID
+    Annotation->Region
+    Annotation->Type
+    Annotation->Content
+    Region->Anchor
+    Anchor->AnchorID
+    Anchor->SignalSet
+    Content->Pair
+}

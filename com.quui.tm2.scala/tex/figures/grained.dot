@@ -1,0 +1,8 @@
+digraph grained{
+node[shape=box  style=filled fillcolor=gray95]
+1[label="bet 7"]
+2[label="bet 7.1"]
+3[label="bet 7.2"]
+1->2
+1->3
+}

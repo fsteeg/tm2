@@ -1,0 +1,36 @@
+
+
+digraph experiment {
+	rankdir=TD
+	node[shape=box style=filled width=1.5]
+	subgraph cluster_0 {
+	
+		subgraph cluster_1598560669 {
+						TrainFeatures -> SensevalClassifier[style=dashed];
+						TrainSense -> SensevalClassifier[style=dashed]
+						label="Synthesis(TrainFeatures,TrainSense)"
+				  }
+				
+	
+		
+				Corpus -> TrainData[style=solid]
+		
+				Corpus -> TestData[style=solid]
+		
+				TrainData -> TrainFeatures[style=solid]
+		
+				TrainData -> TrainSense[style=solid]
+		
+				TestData -> TestFeatures[style=solid]
+		
+				TestFeatures -> SensevalClassifier[style=solid]
+		
+				SensevalClassifier -> EvalSense[style=solid]
+		
+		
+		label="TM2-Experiment:"
+	}
+	eval[style=filled fillcolor=green label="Result:\n0.616" width=1.5]
+	EvalSense -> eval[style=dashed arrowhead=open]
+	
+}

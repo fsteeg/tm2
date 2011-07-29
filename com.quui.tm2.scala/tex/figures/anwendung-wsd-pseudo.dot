@@ -1,0 +1,42 @@
+
+
+digraph experiment {
+	rankdir=TD
+	node[shape=box style=filled width=1.5]
+	subgraph cluster_0 {
+	
+		subgraph cluster_1805050549 {
+						Tokenizer -> Features[style=dashed];
+						Ambig -> Features[style=dashed]
+						label="Synthesis(Tokenizer,Ambig)"
+				  }
+				subgraph cluster_2130545909 {
+						Features -> Classifier[style=dashed];
+						Ambig -> Classifier[style=dashed]
+						label="Synthesis(Features,Ambig)"
+				  }
+				subgraph cluster_1837696316 {
+						Classifier -> SimpleEvaluation[style=dashed];
+						Gold -> SimpleEvaluation[style=dashed]
+						label="Synthesis(Classifier,Gold)"
+				  }
+				
+	
+		
+				Corpus -> Tokenizer[style=solid]
+		
+				Tokenizer -> Ambig[style=solid]
+		
+				Ambig -> Features[style=solid]
+		
+				Features -> Classifier[style=solid]
+		
+				Tokenizer -> Gold[style=solid]
+		
+		
+		label="TM2-Experiment:"
+	}
+	eval[style=filled fillcolor=green label="Result:\nf: 0,60 (p: 0,60, r: 0,60)" width=1.5]
+	SimpleEvaluation -> eval[style=dashed arrowhead=open]
+	
+}

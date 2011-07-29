@@ -1,0 +1,10 @@
+digraph {
+ node[shape=box style=filled fillcolor=gray95]
+ edge[dir=back]
+ core[label="tm2.core"]
+ agents[label="tm2.agents"]
+ scala[label="tm2.scala"]
+ core -> agents
+ agents -> scala
+ core -> scala[label=" benötigt"]	
+}

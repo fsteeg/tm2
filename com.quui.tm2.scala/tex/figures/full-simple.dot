@@ -1,0 +1,19 @@
+
+
+digraph experiment {
+	rankdir=TD
+	node[shape=box style=filled width=1.5]
+	subgraph cluster_0 {
+	
+		
+	
+		
+				Corpus -> Tokenizer[style=solid label=" String"]
+		
+				Tokenizer -> Gazetteer[style=solid label=" Token"]
+		
+		
+		label="TM2-Experiment:"
+	}
+	
+}

@@ -1,0 +1,24 @@
+digraph zusammenhang{
+	node[shape=box width=1.7 style=filled fillcolor=gray95]
+	
+	subgraph cluster_99 {
+	label="Experiment"
+
+	subgraph cluster_0{
+		label="Analyse (1..N)"
+		agenten1[label="Agenten\n(Quellen)"]
+		agenten2[label="Agenten"]
+		agenten1->agenten2[label=" Anno-\n tationen "]
+	}
+	
+	subgraph cluster_1{
+		label="Synthese (0..N)"
+		agenten_s1[label="Agent\n(Beobachter)"]
+		agenten_s2[label="Agent\n(Informant)"]
+		model[label="Modell"]
+		agenten_s1->model[label="Anno-\ntationen "]
+		agenten_s2->model
+	}
+	}
+
+}

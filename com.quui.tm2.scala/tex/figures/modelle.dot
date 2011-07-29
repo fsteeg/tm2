@@ -1,0 +1,29 @@
+digraph zu {
+node[shape=box width=2 style=filled fillcolor=gray95]
+edge[style=dotted]
+Grammatik
+DSL[label="Metamodell\n(& Parser, Editor)"]
+Java
+DotLaTeX[label="Graphviz, WikiText\n(textuell)"]
+Annotationen
+rankdir=LR
+subgraph cluster_0{
+    label="Komponente: DSL" //\nBenötigt: Xtext, Xpand
+    DSL->Grammatik[dir=back  label=" Xtext" constraint=false ]
+}
+
+subgraph cluster_1{
+    label="Komponente: API" //\nBenötigt: Java, JET, XML
+    Java->DSL[dir=back label=" Xpand" ]
+    Annotationen->Java[dir=back  label=" XML" constraint=false ]
+}
+
+subgraph cluster_2{
+    label="Komponente: Doc" //\nBenötigt: Graphviz, \nWikiText, HTML
+    Java -> DotLaTeX [label=" JET"]
+    //DSL -> DotLaTeX [label=" Xpand"]
+    Annotationen -> DotLaTeX [label="" constraint=false ]
+    HTML->DotLaTeX [dir=back label=" dot,\n WikiText" constraint=false]
+}
+
+}

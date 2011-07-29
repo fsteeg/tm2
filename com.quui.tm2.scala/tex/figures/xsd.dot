@@ -1,0 +1,10 @@
+digraph xsd{
+	edge[label=" 1..N"]
+	node[shape=box style=filled fillcolor=gray95]
+	rankdir=TD
+	experiment[shape=record label="{experiment|+data|+agents}"]
+	agents[shape=record label="{agent|+name|+annotations}"]
+	annotations[shape=record label="{annotation|+start|+end|+label|+obj}"]
+	experiment->agents
+	agents->annotations
+}
