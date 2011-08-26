@@ -119,7 +119,7 @@ For the complete run, an overview page with results is generated:
 
 <img src="https://github.com/fsteeg/tm2/raw/master/com.quui.tm2.scala/files/tm2-result.png" width="600px"/>
 
-For a detailed description of the concepts and implementation of TM2 in German, check out this report: "PDF":https://github.com/fsteeg/tm2/raw/master/com.quui.tm2.scala/tex/tm2.pdf, "TeX":https://github.com/fsteeg/tm2/tree/master/com.quui.tm2.scala/tex/tm2.tex
+For a detailed description of the concepts and implementation of TM2 in German, check out this report: "arXiv":http://arxiv.org/abs/1108.0363, "PDF":https://github.com/fsteeg/tm2/raw/master/com.quui.tm2.scala/tex/tm2.pdf, "TeX":https://github.com/fsteeg/tm2/tree/master/com.quui.tm2.scala/tex/tm2.tex
 
 h2. Prerequisites
 
